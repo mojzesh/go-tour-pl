@@ -1,18 +1,18 @@
 Witamy!
-Naucz się jak używać Przewodnika po Go: wliczając w to instrukcje jak poruszać się między lekcje oraz jak uruchomić kod.
+Naucz się jak używać Przewodnika po Go: wliczając w to instrukcje jak poruszać się między lekcjami oraz jak uruchomić kod.
 
 Autorzy Go
 https://golang.org
 
 * Cześć!
 
-Witamy na przewodniku po [[https://golang.org/][języku Go]].
+Witamy w przewodniku po [[https://golang.org/][języku Go]].
 
 Przewodnik jest podzielony na listę modułów do których możesz przejść
 klikając na logo
 [[javascript:highlight(".logo")][Przewodnik po Go]] w lewym górnym rogu ekranu.
 
-W dowolnym momencie możesz zobaczyć spis treści poprzez kliknięcie na [[javascript:highlightAndClick(".nav")][menu]] w prawym górnym rogu ekranu.
+W dowolnym momencie możesz zobaczyć spis treści przewodnika poprzez kliknięcie na [[javascript:highlightAndClick(".nav")][menu]] w prawym górnym rogu ekranu.
 
 W przewodniku po Go zapoznasz się z serią slajdów i ćwiczeń które będziesz mógł wykonać.
 
@@ -41,7 +41,7 @@ Gdy będziesz gotów by zacząć, naciśnij [[javascript:highlightAndClick(".nex
 
 * Go w lokalnych wersjach językowych
 
-Przewodnik po Go jest również dostępna w następujących językach:
+Przewodnik po Go jest również dostępny w następujących językach:
 
 - [[https://go-tour-br.appspot.com/][Brazilian Portuguese — Português do Brasil]]
 - [[https://go-tour-ca.appspot.com/][Catalan — Català]]
@@ -52,7 +52,6 @@ Przewodnik po Go jest również dostępna w następujących językach:
 - [[https://go-tour-id2.appspot.com/][Indonesian — Bahasa Indonesia]]
 - [[https://go-tour-jp.appspot.com/][Japanese — 日本語]]
 - [[https://go-tour-ko.appspot.com/][Korean — 한국어]]
-- [[https://go-tour-pl1.appspot.com/][Polish — Polski]]
 - [[https://go-tour-th.appspot.com/][Thai — ภาษาไทย]]
 - [[https://go-tour-uz.appspot.com/][Uzbek — Ўзбекча]]
 
@@ -72,7 +71,7 @@ Naciśnij przycisk [[javascript:highlightAndClick(".next-page")]["dalej"]] lub `
 #appengine:
 #appengine: Po uruchomieniu powyższej komendy, Przewodnik po Go zostanie pobrana i umieszczona w folderze
 #appengine: [[https://golang.org/doc/code.html#Workspaces][workspace]] /`bin`.
-#appengine: Gdy uruchomisz program, przeglądarka otworzy się przeglądarka internetowa z twoją lokalną wersją Go.
+#appengine: Gdy uruchomisz program, otworzy się przeglądarka internetowa z twoją lokalną wersją Go.
 #appengine:
 #appengine: Oczywiście, możesz kontynuować Przewodnik po Go używając tej strony!
 
@@ -82,7 +81,7 @@ Naciśnij przycisk [[javascript:highlightAndClick(".next-page")]["dalej"]] lub `
 #appengine: serwisem webowym działającym na serwerach [[https://golang.org/][golang.org]].
 #appengine:
 #appengine: Ten serwis odbiera program napisany w Go, kompiluje go, linkuje,
-#appengine: uruchamia w sandboxie, a następnie zwraca rezultat.
+#appengine: uruchamia go w sandboxie, a następnie zwraca rezultat.
 #appengine:
 #appengine: Istnieją pewne ograniczenia na programy które są uruchamiane w playgroundzie:
 #appengine:
