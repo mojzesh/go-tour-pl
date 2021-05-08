@@ -67,15 +67,15 @@ Zmienne zadeklarowane w środku krótkiej instrukcji `if` są również dostępn
 
 * Ćwiczenie: Pętle oraz funkcje
 
-Jako sposób na przećwiczenie funkcji oraz pętli, zaimplementujmy funkcję pierwiastka kwadratowego: posiadając liczbę x, chcemy znaleźć liczbę z, taką że z² jest najbliższe wartości liczby x.
+Jako sposób na przećwiczenie funkcji oraz pętli, zaimplementujmy funkcję pierwiastka kwadratowego: mając daną liczbę x, chcemy znaleźć liczbę z, taką że z² jest możliwie najbliższej liczby x.
 
 Komputery z reguły obliczają pierwiastek kwadratowy x używając pętli.
 Zaczynając od jakieś wybranej liczby `z`, możemy poprawić wartość `z` na podstawie tego jak blisko jest z² do x, ulepszając nasz rezultat:
 
 	z -= (z*z - x) / (2*z)
 
-Poprzez dopasowywanie `z` nasz rezultat powinien wyglądać coraz lepiej,
-aż do momentu gdy otrzymamy odpowiedź tak zbliżoną do pierwiastka kwadratowego jak się tylko da.
+Po każdej zmianie `z` nasz rezultat powinien się poprawiać,
+aż do momentu gdy otrzymamy odpowiedź tak zbliżoną do pierwiastka kwadratowego jak tylko jest to możliwe.
 
 Zaimplementuj powyższe rozumowanie w napisanej dla ciebie `func`Sqrt`.
 Przyzwoitym punktem startowym dla dowolnego `z` będzie 1.
@@ -142,7 +142,7 @@ Ta konstrukcja może być bardziej przejrzystym sposobem na zapisanie długiego 
 
 * Defer — czyli opóźnione wykonanie
 
-Instrukcja defer opóźnia wykonanie funkcji do momentu gdy otaczająca funkcja nie zwróci wyniku.
+Instrukcja defer opóźnia wykonanie funkcji do momentu gdy otaczająca funkcja zwróci wyniku.
 
 Wywołane argumenty w defer są ewaluowane natychmiastowo, jednak sama funkcja
 jest wywołana dopiero gdy otaczająca ją funkcja zwróci wynik.
@@ -151,7 +151,7 @@ jest wywołana dopiero gdy otaczająca ją funkcja zwróci wynik.
 
 * Stertowanie defer
 
-Funkcje wywołane z instrukcją `defer` są umieszczane na stosie. Po tym jak główna funkcja zwróci wynik, funkcje wywołane wewnątrz niej z instrukcją `defer` z są wykonywane w kolejności od ostatniej do pierwszej która została umieszczona na stosie (LIFO, ang. Last In, First Out).
+Funkcje wywołane z instrukcją `defer` są umieszczane na stosie. Po tym jak główna funkcja zwróci wynik, funkcje wywołane wewnątrz niej z instrukcją `defer` z są wykonywane w kolejności od ostatniej do pierwszej z nich która została umieszczona na stosie (LIFO, ang. Last In, First Out).
 
 By dowiedzieć się więcej o instrukcji `defer`, przeczytaj ten
 [[https://blog.golang.org/defer-panic-and-recover][artykuł]] na „The Go Blog”.
@@ -162,4 +162,4 @@ By dowiedzieć się więcej o instrukcji `defer`, przeczytaj ten
 
 Ukończyłeś tę lekcję!
 
-Możesz wrócić do listy [[/list][modułów]] by dowiedzieć się czego nauczyć się następnie, lub kontynuować do [[javascript:click('.next-page')][następnej lekcji]]
+Możesz wrócić do listy [[/list][modułów]] by zobaczyć czego więcej możesz się nauczyć, lub od razu przejść do [[javascript:click('.next-page')][następnej lekcji]].

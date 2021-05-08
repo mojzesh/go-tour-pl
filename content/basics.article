@@ -18,8 +18,8 @@ Zgodnie z przyjętą konwencją, nazwa pakietu jest taka sama jak ostatni elemen
 #appengine: deterministyczne, tak więc za każdym razem gdy puścisz program
 #appengine: `rand.Intn` zwróci on tę samą wartość.
 #appengine:
-#appengine: (By zobaczyć inną liczbę, ustaw odpowiednie wartość ziarna generator liczb; zobacz [[https://golang.org/pkg/math/rand/#Seed][`rand.Seed`]].
-#appengine: W playgroundzie czas jest stałą, więc będziesz musiał użyć innej wartości jako ziarna do generatora.)
+#appengine: (By zobaczyć inną liczbę, ustaw odpowiednią wartość ziarna generator liczb; zobacz [[https://golang.org/pkg/math/rand/#Seed][`rand.Seed`]].
+#appengine: W playgroundzie czas jest stały, więc będziesz musiał użyć innej wartości jako ziarna do generatora.)
 
 .play basics/packages.go
 
@@ -38,7 +38,7 @@ Jednak częścią dobrego stylu programowania w Go jest używanie sformatowanych
 
 * Nazwy eksportowane (ang. exported names)
 
-W Go nazwa jest eksportowana, gdy zaczyna od dużej litery.
+W Go nazwa jest eksportowana, gdy zaczyna się od dużej litery.
 Na przykład, `Pizza` jest nazwą eksportowaną, tak samo jak `Pi`, które jest eksportowane z pakietu `math`.
 
 `pizza` oraz `pi` nie zaczynają się od dużej litery, więc nie są eksportowane.
@@ -88,13 +88,13 @@ Funkcja `swap` zwraca dwa stringi.
 
 * Nazwane wartości zwracane
 
-W Go wartości zwracane mogą posiadać nazwy. Jeśli ją mają, to są one traktowane jako zmienne zdefiniowane na samej górze funkcji.
+W Go wartości zwracane mogą posiadać nazwy. Jeśli je mają, to są one traktowane jako zmienne zdefiniowane na samej górze funkcji.
 
 Nazwy wartości zwracanych powinny być tak dobrane, by wyjaśniały ich znaczenie.
 
 Instrukcja `return` bez żadnych argumentów zwraca nazwane wartości zwracana. Mówi wtedy on "nagiej" instrukcji return (ang. "naked" return)
 
-Naga instrukcja return powinna być używana tylko w krótkich funkcjach, takich jak ta w podanym przykładzie. W przeciwny razie jej użycie może pogorszyć czytelność długiej funkcji.
+Naga instrukcja return powinna być używana tylko w krótkich funkcjach, takich jak ta w podanym przykładzie. W przeciwny razie jej użycie może pogorszyć czytelność długich funkcji.
 
 .play basics/named-results.go
 
@@ -110,7 +110,7 @@ Instrukcja `var` może znajdować się na poziomie pakietu lub funkcji. W przyk�
 
 Deklaracja zmiennej może zawierać inicjalizator, po jednym dla każdej zmiennej.
 
-Jeśli inicjalizator jest obecny, podanie typu jest zbędne; zmienna przyjemnie typ inicjalizatora.
+Jeśli inicjalizator jest obecny, podanie typu jest zbędne; zmienna przyjmie typ inicjalizatora.
 
 .play basics/variables-with-initializers.go
 

@@ -1,5 +1,5 @@
 Więcej typów: struktury (ang. structs), wycinki (ang. slices), oraz mapy (ang. maps).
-Naucz się jak zdefiniować nowe typy dany. Ta lekcja omawia struktury (ang. structs), tablice (ang. arrays), wycinki (ang. slices) oraz mapy (ang. maps).
+Naucz się jak zdefiniować nowe typy danych. Ta lekcja omawia struktury (ang. structs), tablice (ang. arrays), wycinki (ang. slices) oraz mapy (ang. maps).
 
 Autorzy Go
 https://golang.org
@@ -23,7 +23,7 @@ Operator `*` oznacza wartość wskazywaną w pamięci przez dany wskaźnika.
 	fmt.Println(*p) // odczytuje wartość i poprzez wskaźnik p
 	*p = 21         // ustawia wartość i poprzez wskaźnik p
 
-Powyższa własność nazywana jest „dereferencją” (ang. dereferencing) lub „pośrednictwo” (ang. indirecting).
+Powyższa własność nazywana jest „dereferencją” (ang. dereferencing) lub „pośrednictwem” (ang. indirecting).
 
 W przeciwieństwie do C, Go nie ma arytmetyki wskaźników.
 
@@ -43,10 +43,10 @@ Aby uzyskać dostęp do pola struktury używamy kropki.
 
 * Wskaźniki do struktur (ang. pointers to structs)
 
-Do pół struktury możemy się również dostać za pomocą wskaźnika do struktury.
+Do pól struktury możemy się również dostać za pomocą wskaźnika do struktury.
 
-By uzyskać dostęp do pola `X` danej strukturze, którą wskazuje wskaźnik do struktury `p`, możemy napisać `(*p).X`.
-Jednakże, ta notacja jest niezbyt poręczna, więc Go pozwala użyć nam następującej składni: `p.X`. W tym przypadku Go pozwala nam opuścić jawną dereferencję.
+By uzyskać dostęp do pola `X` struktury którą wskazuje wskaźnik do struktury `p`, możemy napisać `(*p).X`.
+Jednakże, ta notacja jest niezbyt poręczna, więc Go pozwala użyć nam następującej składni: `p.X`. W tym przypadku Go pozwala nam opuścić jawną dereferencję wskaźnika.
 
 .play moretypes/struct-pointers.go
 
@@ -72,7 +72,7 @@ Wyrażenie
 deklaruje zmienną `a` jako tablice zawierającą dziesięć intów (liczb całkowitych).
 
 Długość tablicy jest częścią jej typu, tak więc rozmiar tablicy nie może być zmieniany.
-To może wydawać się niewygodne, jednak nie należy się martwić;
+To może wydawać się niewygodne, jednak nie należy się tym martwić;
 Go posiada wiele wygodnych sposobów na pracę z tablicami.
 
 .play moretypes/array.go
@@ -80,7 +80,7 @@ Go posiada wiele wygodnych sposobów na pracę z tablicami.
 * Wycinki (ang. slices)
 
 Tablice mają ustaloną długość. Natomiast wycinki (ang. slices)
-są elastycznym w użyciu podglądem (ang. view) na elementy tablicy, których długość możemy dynamicznie zmieniać tablicami.
+są elastycznym w użyciu podglądem (ang. view) na elementy pewnej tablicy, których długość możemy dynamicznie zmieniać.
 W praktyce, wycinki są używane dużo częściej niż tablice.
 
 Type `[]T` jest wycinkiem z elementami o typie `T`. Składnię `[]T` czytamy: „jest to wycinek tablicy o wartościach typu `T`”, patrz [[javascript:click('.next-page')][następny slajd]].
@@ -135,7 +135,7 @@ Dla poniżej tablicy:
 
 	var a [10]int
 
-te poniższe wyrażenia tworzące wycinki są równoważne:
+poniższe wyrażenia tworzące wycinki są równoważne:
 
 	a[0:10]
 	a[:10]
@@ -149,11 +149,11 @@ te poniższe wyrażenia tworzące wycinki są równoważne:
 
 Wycinek posiada zarówno _długość_ (ang. length) jak i _pojemność_ (ang. capacity).
 
-Długość (ang. len) wycinka to liczba elementów które posiada.
+Długość (ang. len) wycinka to liczba elementów na które wskazuje.
 
 Pojemność (ang. cap) wycinka to liczba elementów tablicy na którą dany wycinek wskazuje, licząc od pierwszego elementu wycinka.
 
-Długość i pojemność wycinka `s` może zostać uzyskana po przez użycie wyrażenia
+Długość i pojemność wycinka `s` może zostać uzyskana po przez użycie wyrażeń
 `len(s)` oraz `cap(s)`.
 
 Jeśli tylko dany wycinek posiada odpowiednią pojemność, możemy zwiększyć jego długość poprzez wycięcie z niego kolejnego wycinka (ang. re-slicing).
@@ -196,7 +196,6 @@ By określić pojemność, wystarczy dodać trzeci argument do funkcji `make`:
 Wycinki mogą zawierać jako swój element każdy typ, włączając w to inne wycinki.
 
 .play moretypes/slices-of-slice.go
-??????????????????????????????
 
 * Dołączanie do wycinka
 
@@ -205,7 +204,7 @@ Bardzo często zdarza się że chcemy dodać nowy element do wycinka, Go posiada
 
 	func append(s []T, vs ...T) []T
 
-Pierwszy parametr funkcji `append` jest wycinek `s` o typie `T`, pozostałe parametrów to wartości typu `T` które chcemy dołączyć do wycinka.
+Pierwszym parametrem funkcji `append` jest wycinek `s` o typie `T`, pozostałe parametry to wartości typu `T` które chcemy dołączyć do wycinka.
 
 Rezultatem funkcji `append` jest wycinek zawierający wszystkie elementy oryginalnego wycinka oraz dodatkowe elementy.
 
@@ -221,7 +220,7 @@ Jeśli tablica na którą wskazuje `s` jest zbyt mała by pomieścić wszystkie 
 Słowo kluczowe `range` używane w pętli `for` pozwala nam iterować po wycinku (ang. slice) lub mapie (ang. map).
 
 Gdy iterujemy po zakresie wycinka, w każdym kroku są zwracane dwie wartości.
-Pierwszą jest indeks elementu wycinka, a drugą jest kopia tego elementu o tym indeksie.
+Pierwszą jest indeks elementu wycinka, a drugą jest kopia elementu o tym indeksie.
 
 .play moretypes/range.go
 
@@ -240,11 +239,11 @@ Jeśli chcesz otrzymać tylko indeks, możesz zupełnie pominąć wartość elem
 
 * Ćwiczenie: Wycinki
 
-Zaimplementuj funkcję `Pic`. Powinna ona zwrócić wycinek o długości `dy`, którego elementami są wycinki wycinkiem zawierający `dx` 8-bitowych liczb całkowitych bez znaku (ang. 8-bit unisgned integer). Gdy uruchomisz program, wyświetli on obrazek, interpretując wartości intów w skali szarości (tak naprawdę, to w skali „niebieskości”).
+Zaimplementuj funkcję `Pic`. Powinna ona zwrócić wycinek o długości `dy`, którego elementami są wycinki zawierające `dx` 8-bitowych liczb całkowitych bez znaku (ang. 8-bit unisgned integer). Gdy uruchomisz program, wyświetli on obrazek, interpretując wartości intów w skali szarości (tak naprawdę, to w skali „niebieskości”).
 
 Wybór obrazka należy do ciebie. Przykładowe funkcje które dają ciekawy rezultat to: `(x+y)/2`, `x*y`, and `x^y`.
 
-(Musisz użyć pętli by przypisać każdemu elementowi w `[][]uint8` wartość `[]uint8`.)
+(Musisz użyć pętli by przypisać każdemu elementowi w `[][]uint8` wartość typu `[]uint8`.)
 
 (Użyj `uint8(intValue)` by dokonać konwersji typów.)
 
@@ -269,7 +268,7 @@ Mapy literalne są podobne do struktur literalnych, ale podanie kluczy jest koni
 
 * Mapy literalne ciąg dalszy
 
-Jeśli typ elementu zwracanego przez mapę jest po prostu nazwą typu, możesz pominąć w deklaracjach elementów mapy literalnej.
+Jeśli typ elementu zwracanego przez mapę jest po prostu nazwą typu, możesz pominąć typ w deklaracjach elementów mapy literalnej.
 
 .play moretypes/map-literals-continued.go
 
@@ -320,9 +319,9 @@ Wartości będące funkcjami mogą być użyte jako argumenty funkcji oraz warto
 
 * Domknięcia funkcji (ang. function closures)
 
-Funkcje w Go mogą być domknięciami. Domknięcie to funkcji będąca wartością która odnosi się do zmiennych które będący poza jej ciałem. Funkcja ma dostęp do wspomnianych zmiennych; w tym sensie funkcja jest „powiązana” z tymi zmiennymi.
+Funkcje w Go mogą być domknięciami. Domknięcie to funkcji będąca wartością która odnosi się do zmiennych znajdujących się poza jej ciałem. Funkcja ma dostęp do wspomnianych zmiennych; w tym sensie funkcja jest „powiązana” z tymi zmiennymi.
 
-Przykładowo, funkcja `adder` zwraca domknięcie. Każde domknięcie jest powiązana z swoją własną zmienną `sum`.
+Przykładowo, funkcja `adder` zwraca domknięcie. Każde domknięcie jest powiązane ze swoją własną zmienną `sum`.
 
 .play moretypes/function-closures.go
 
