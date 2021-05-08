@@ -1,26 +1,25 @@
-Instrukcje kontroli przepływu: for, if, else, switch oraz defer
-Naucz się jak kontrolować przepływ twego kodu używając warunków (conditionals), pętli (loops), switch oraz defers. 
+Instrukcje sterujące: for, if, else, switch oraz defer
+Naucz się jak kontrolować działaniem twejego kodu używając instrukcji warunkowych (ang. conditionals), pętli (ang. loops), instrukcji switch oraz defer.
 
 Autorzy Go
 https://golang.org
 
 * For
 
-Go posiada tylko jedną konstrukcję pętli, jest nią pętla `for`.
+Go posiada tylko jeden typ pętli, jest nią pętla `for`.
 
-Podstawowa pętla `for` posiada trzy komponenty oddzielone średnikiem:
+Podstawowa pętla `for` posiada trzy składniki oddzielone średnikiem:
 
 - inicjalizacja: odbywa się raz, tuż przez rozpoczęciem pętli
 - wyrażenie warunkowe: sprawdzone przed każdym rozpoczęciem pętli
-- inkrementacja: wykonana po każdym przejściu przez pętlę.
+- inkrementacja: wykonana po każdej iteracji pętli.
 
-Bardzo często, inicjalizacja to krótkie określenie zmiennej lub zmiennych, i owe
-zmienne będą widoczne tylko w bloku danej pętli `for`.
+Bardzo często inicjalizacja jest krótką deklaracja zmiennej lub zmiennych, i owe zmienne będą dostępne tylko wewnątrz bloku danej pętli `for`.
 
-Pętla zakończy iterację gdy tylko wartość boolean zostanie określona jako `false`.
+Pętla zakończy iterację gdy tylko wartość boolowska przyjmie wartość `false`.
 
-*Uwaga:* W odróżnieniu od innych języków takich jak C, Java, lub JavaScript nie używamy nawiasów 
-otaczających trzy komponenty instrukcji `for` jednak `{`}` są zawsze wymagane.
+*Uwaga:* W odróżnieniu od innych języków takich jak C, Java, lub JavaScript nie używamy nawiasów
+otaczających trzy składniki instrukcji `for` jednak `{`}` muszą być zawsze obecne.
 
 .play flowcontrol/for.go
 
@@ -30,30 +29,29 @@ Inicjalizacja oraz inkrementacja są opcjonalne.
 
 .play flowcontrol/for-continued.go
 
-* "for" jest w Go jak "while"
+* "For" jest "while" Go
 
-Używane w C `while` jest tym samym co `for` w Go.
+W tym momencie możesz opuścić średniki: `while` z C jest tym samym co `for` w Go.
 
 .play flowcontrol/for-is-gos-while.go
 
-* Nieskończoność
+* Wieczna pętla
 
-Jeśli ominiesz wyrażenie warunkowe pętli, stworzysz pętle nieskończoną.
+Jeśli ominiesz wyrażenie warunkowe pętli, stworzysz nieskończoną pętle.
 
 .play flowcontrol/forever.go
 
 * If
 
-Instrukcja `if` w Go jest tak jak pętla `for`; wyrażenia nie muszą otaczać nawiasy `(`)`
-jednak `{`}` są wymagane.
+Instrukcja `if` w Go przypomina jego pętlę `for`; wyrażenia boolowskie nie musi być otoczone nawiasami `(`)` jednak `{`}` są wymagane.
 
 .play flowcontrol/if.go
 
 * If z krótką instrukcją
 
-Tak jak `for`, instrukcja `if` może rozpocząć się krótkim wyrażeniem tuż przed warunkiem.
+Tak jak `for`, instrukcja `if` może rozpoczynać się krótką instrukcją umieszczoną tuż przed warunkiem boolowskim.
 
-Zmienne zadeklarowane poprzez wyrażenie są zawarte w bloku tylko do końca `if`.
+Zmienne zadeklarowane poprzez tą instrukcje są dostępne tylko do końca instrukcji `if`.
 
 (Spróbuj użyć `v` w ostatnim wyrażeniu `return`.)
 
@@ -61,71 +59,63 @@ Zmienne zadeklarowane poprzez wyrażenie są zawarte w bloku tylko do końca `if
 
 * If oraz else
 
-Zmienne zadeklarowane w środku krótkiej instrukcji `if` są również dostępne w środku
-każdego bloku `else`.
+Zmienne zadeklarowane w środku krótkiej instrukcji `if` są również dostępne w środku każdego bloku `else`.
 
-(Oba wywołania `pow` zwracają rezultat zanim wywołanie do `fmt.Println` w `main` się zaczyna.)
+(Oba wywołania `pow` zwracają rezultat zanim wywołanie `fmt.Println` w `main` się rozpocznie.)
 
 .play flowcontrol/if-and-else.go
 
-* Ćwiczenie: Pętle oraz Funkcje
+* Ćwiczenie: Pętle oraz funkcje
 
-Jako sposób przećwiczenia funkcji oraz pętli, zaimplementujmy funkcję pierwiastka kwadratowego: posiadając liczbę x, chcemy znaleźć liczbę dla której z² jest najbliższy liczbie x.
+Jako sposób na przećwiczenie funkcji oraz pętli, zaimplementujmy funkcję pierwiastka kwadratowego: posiadając liczbę x, chcemy znaleźć liczbę z, taką że z² jest najbliższe wartości liczby x.
 
 Komputery z reguły obliczają pierwiastek kwadratowy x używając pętli.
-Zaczynając od jakieś przykładowej liczby `z`, możemy dopasować `z` na podstawie tego jak zbliżone z² jest do x,
-ulepszając nasz rezultat:
+Zaczynając od jakieś wybranej liczby `z`, możemy poprawić wartość `z` na podstawie tego jak blisko jest z² do x, ulepszając nasz rezultat:
 
 	z -= (z*z - x) / (2*z)
 
-Poprzez dostosowywanie `z` nasz rezultat powinien wyglądać coraz lepiej,
-aż do momentu gdy otrzymamy odpowiedź najbardziej zbliżoną do pierwiastka kwadratowego.
+Poprzez dopasowywanie `z` nasz rezultat powinien wyglądać coraz lepiej,
+aż do momentu gdy otrzymamy odpowiedź tak zbliżoną do pierwiastka kwadratowego jak się tylko da.
 
-Zaimplementuj to samo używając funkcji `func`Sqrt`.
-Przyzwoitym początkiem dla `z` będzie 1.
-By zacząć, powtórz kalkulację 10 razy i wydrukuj każde `z`.
-Zobacz jak blisko odpowiedzi jestes dla różnych wartości x (1, 2, 3, ...) oraz
-jak szybko rezultat się poprawia.
+Zaimplementuj powyższe rozumowanie w napisanej dla ciebie `func`Sqrt`.
+Przyzwoitym punktem startowym dla dowolnego `z` będzie 1.
+Na początek, powtórz obliczenia 10 razy i wydrukuj każde `z`.
+Zobacz jak blisko odpowiedzi jesteś dla różnych wartości x (1, 2, 3, ...) oraz jak szybko wynik się poprawia.
 
-Wskazówka: By zadeklarować wartość zmiennoprzecinkową (floating point),
-skorzystaj z syntaxu zmiennoprzecinkowego lub użyj konwersji:
+Wskazówka. By zadeklarować wartość zmiennoprzecinkową (ang. floating point value),
+skorzystaj ze składni zmiennoprzecinkowej lub użyj konwersji:
 
 	z := 1.0
 	z := float64(1)
 
-Następnie, zmień warunek pętli tak, by zatrzymała się gdy wartość
-przestanie się zmieniać (lub będzie się zmieniać tylko o bardzo niską wartość).
-Zaobserwuj czy stanie się to po więcej lub mniej niż 10 powtórzeniach.
-Spróbuj również innych wartości podstawowych dla z, x, lub nawet x/2!
-Jak blisko twoja funkcja jest funkcji [[https://golang.org/pkg/math/#Sqrt][math.Sqrt]] ze standardowej biblioteki?
+Następnie, zmień warunek pętli tak, by pętla zatrzymała się gdy obliczana wartość przestanie się zmieniać (lub będzie się zmieniać tylko o bardzo niewielką liczbę).
+Sprawdź czy stanie się to po więcej lub mniej niż 10 iteracjach.
+Wypróbuj inne wartości początkowe dla z, takie jak x, lub x/2.
+Jak blisko wartość zwracana przez twoją funkcję jest tej zwracanej przez funkcję [[https://golang.org/pkg/math/#Sqrt][math.Sqrt]] biblioteki standardowej?
 
-(*Uwaga:* Jeśli jesteś zainteresowany detalami algorytmu, wyżej wymienione z² − x 
-oznacza jak daleko wartość z² jest od wartości którą powinno być (x), podzielenie 2z jest pochodną 
-z², by skalować sposób w jaki dostosowujemy z, w zależności od tego jak szybko zmienia się wartość z²)
+(*Uwaga:* Jeśli jesteś zainteresowany szczegółami działania tego algorytmu, podane wyżej wyrażenie z² − x pokazuje jak daleko wartość z² odbiega od tej jaką powinna mieć (x). Podzielenie 2z, które jest pochodną
+z², przeskalowuje wielkość o jaką poprawiamy z, by uwzględnić to jak szybko zmienia się wartość z².)
 
 To podejście nazywane jest [[https://en.wikipedia.org/wiki/Newton%27s_method][metodą Newtona]].
-Działa ono bardzo dobrze w wielu funkcjach, jednak wyjątkowo dobrze dla pierwiastka kwadratowego.
+Działa ono bardzo dobrze dla wielu funkcjach, jednak wyjątkowo dobrze dla pierwiastka kwadratowego.
 
 .play flowcontrol/exercise-loops-and-functions.go
 
 * Switch
 
-Instrukcja warunkowa `switch` jest krótszym sposobem na zapisanie łańcucha instrukcji `if`-`else`.
-Zostanie wykonany kod którego wynik, zgadza się z warunkiem w instrukcji `switch`.
+Instrukcja warunkowa `switch` jest krótszym sposobem na zapisanie ciągu instrukcji `if`-`else`.
+Wykonuje pierwszy przypadek dla którego wartość jego warunku jest równa wyrażaniu warunkowemu.
 
-Switch w go jest tym samym co w C, C++, Java, JavaScript, oraz PHP,
-z tą różnicą że w Go, puszczany jest tylko przypadek(`case`) który spełnia warunki, a nie 
-wszystkie pozostałe przypadki.
-W efekcie, instrukcja `break` ktora jest wymagana na końcu każdego przypadku w innych językach, 
-w Go dostarczana jest automatycznie.
-Kolejną ważną różnicą jest to, że przypadki w Go nie muszą być stałymi, a wartości przekazywane,
-nie muszą być integerami.
+Switch w Go jest jak to w C, C++, Java, JavaScript, oraz PHP,
+z tą różnicą że w Go, wykonywany jest tylko przypadek (ang. case) który spełnia zadany warunek, a nie również wszystkie pod nim.
+W efekcie, instrukcja `break` która jest wymagana na końcu każdego przypadku w innych językach, w Go dostarczana jest automatycznie.
+Kolejną ważną różnicą jest to, że warunki `switch` w Go nie muszą być stałymi, a wartości porównywane nie muszą być liczbami całkowitymi (ang. integers).
 
 .play flowcontrol/switch.go
 
-* Ewaluacja Switch
+* Porządek wykonywania instrukcji switch
 
-Przypadki switch są ewaluowane od góry do dołu, zatrzymując się gdy przypadek pokrywa się z warunkiem.
+Warunki switch są wykonywane od góry do dołu, procedura zatrzymuje się gdy wartość danego warunku pokrywa się z wartością sprawdzaną.
 
 (Na przykład,
 
@@ -134,43 +124,42 @@ Przypadki switch są ewaluowane od góry do dołu, zatrzymując się gdy przypad
 	case f():
 	}
 
-`f` nie zostanie wykonany jeżeli `i==0`.)
+`f` nie zostanie wykonany jeżeli `i == 0`.)
 
-#appengine: *Uwaga:* Czas w playgroundzie Go zawsze zaczyna się od
-#appengine: 2009-11-10 23:00:00 UTC, wartość której ważność pozastawimy do ustalenia
-#appengine: dla czytelnika.
+#appengine: *Uwaga:* Czas w playgroundzie Go jest liczony od
+#appengine: 2009-11-10 23:00:00 UTC, ustalenie znaczenia tej wartości
+#appengine: pozostawiamy jako ćwiczenie dla czytelnika.
 
 .play flowcontrol/switch-evaluation-order.go
 
-* Switch bezwarunkowy
+* Switch bez głównego warunku
 
-Switch bezwarunkowy jest tym samym co `switch`true`.
+Switch bez głównego warunku jest tym samym co `switch`true`.
 
-Ten konstrukt może być bardzo przejrzystym sposobem na zapisanie długiego łańcucha if-then-else.
+Ta konstrukcja może być bardziej przejrzystym sposobem na zapisanie długiego ciągu if-then-else.
 
 .play flowcontrol/switch-with-no-condition.go
 
-* Defer - czyli opóźnione wykonanie
+* Defer — czyli opóźnione wykonanie
 
-Instrukcja defer opóźnia wykonanie funkcji dopóki otaczająca funkcja nie zwróci wyniku.
+Instrukcja defer opóźnia wykonanie funkcji do momentu gdy otaczająca funkcja nie zwróci wyniku.
 
 Wywołane argumenty w defer są ewaluowane natychmiastowo, jednak sama funkcja
-jest wywołana dopiero gdy otaczająca ją funkcja zwraca wynik.
+jest wywołana dopiero gdy otaczająca ją funkcja zwróci wynik.
 
 .play flowcontrol/defer.go
 
 * Stertowanie defer
 
-Wywołane funkcje deferred są pchnięte do stosu. Gdy funckja zwraca wartość, jej 
-wywołania funkcji deferred są egzekwowane od ostatniej która została wepchnięta do stosu. 
+Funkcje wywołane z instrukcją `defer` są umieszczane na stosie. Po tym jak główna funkcja zwróci wynik, funkcje wywołane wewnątrz niej z instrukcją `defer` z są wykonywane w kolejności od ostatniej do pierwszej która została umieszczona na stosie (LIFO, ang. Last In, First Out).
 
-By nauczyć się więcej o wyrażeniach defer, przeczytaj ten 
-[[https://blog.golang.org/defer-panic-and-recover][blog post]].
+By dowiedzieć się więcej o instrukcji `defer`, przeczytaj ten
+[[https://blog.golang.org/defer-panic-and-recover][artykuł]] na „The Go Blog”.
 
 .play flowcontrol/defer-multi.go
 
 * Gratulujemy!
 
-Ukończyłeś tą lekcję!
+Ukończyłeś tę lekcję!
 
 Możesz wrócić do listy [[/list][modułów]] by dowiedzieć się czego nauczyć się następnie, lub kontynuować do [[javascript:click('.next-page')][następnej lekcji]]
