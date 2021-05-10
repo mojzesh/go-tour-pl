@@ -1,15 +1,15 @@
 Współbieżność (ang. concurrency)
 
-W Go współbieżności jedną z podstawowych część języka. Ta lekcja prezentuje
-gorutyny oraz kanały i jak można ich użyć, by zaimplementować różne
-schematy współbieżności.
+W Go współbieżności jest jedną z podstawowych składowych języka. Ta lekcja
+prezentuje gorutyny oraz kanały i jak można ich użyć, by zaimplementować
+różne schematy współbieżności.
 
 Autorzy Go
 https://golang.org
 
 * Gorutyny (ang. goroutines)
 
-W Go _gorutyna_ jest wydajnym wątkiem którymi zarządza biblioteka runtime.
+W Go _gorutyna_ jest wydajnym wątkiem którym zarządza biblioteka runtime.
 
 Kod
 
@@ -24,13 +24,14 @@ Ewaluacja wartości `f`, `x`, `y` oraz `z` odbywa się w obecnej gorutynie, a wy
 Gorutyny działają w tej samej przestrzeni adresowów, tak więc dostęp
 do współdzielonej pamięci musi być zsynchronizowany. Pakiet
 [[https://golang.org/pkg/sync/][`sync`]] dostarcza przydatnych prymitywów,
-jednak nie będziesz ich zbyt często potrzebował, ponieważ Go posiada inne prymitywy stworzone w tym celu. (Zobacz następny slajd.)
+jednak nie będziesz ich zbyt często potrzebował, ponieważ Go posiada inne
+prymitywy stworzone w tym celu. (Zobacz następny slajd.)
 
 .play concurrency/goroutines.go
 
 * Kanały (ang. channels)
 
-Kanały są posiadającymi typ „kablami” przez które możesz przesyłać
+Kanały są posiadającymi typ „kablami” przez które możesz wysyłać
 i odbierać wartości używając operatora `<-`.
 
 	ch <- v    // Wysyłam v do kanału ch.
@@ -69,7 +70,7 @@ Zmodyfikuj przykład tak by przepełnić bufor i zobacz co się stanie.
 
 * Zakres i zamykanie kanału (ang. range, closing of channel)
 
-Przesyłający może zamknąć (ang. `close`) kanał by zasygnalizować, iż do
+Wysyłający może zamknąć (ang. `close`) kanał by zasygnalizować, iż do
 danego kanału nie zostanie już przesłana żadna wartość. Odbierając może
 sprawdzić czy kanał został zamknięty poprzez wprowadzenie drugiego parametru
 do wyrażenia odbierającego wartości z kanału:
@@ -83,17 +84,18 @@ Pętla `for`i`:=`range`c` cały czas odbiera wartości z kanału `c`, dopóki te
 nie zostanie zamknięty.
 
 *Uwaga:* Tylko wysyłający powinien zamykać kanał, nigdy odbierający. Próba
-wysłania czegoś przez zamkniętego kanału wywołać panikę.
+wysłania czegoś przez zamknięty kanał wywoła panikę.
 
 *Kolejna*uwaga:* Kanały nie są jak pliki; zwykle nie musisz ich zamykać.
 Zamykanie kanałów jest niezbędne tylko wtedy, gdy odbiorca musi wiedzieć,
-że nie dostanie już z niego żadnych więcej wartości, na przykład po to by mógł zakończyć działanie wyrażenia `range` w pętli.
+że więcej wartość nie zostanie już nim przesłanych, na przykład po to by
+mógł zakończyć działanie wyrażenia `range` w pętli.
 
 .play concurrency/range-and-close.go
 
 * Select
 
-Instrukcja `select` pozwala gorutynom oczekiwać w tym samym czasie na sygnał z kilku różnych źródeł
+Instrukcja `select` pozwala gorutynom oczekiwać w tym samym czasie na sygnał z kilku różnych źródeł.
 
 Instrukcja `select` blokuje działanie gorutyny dopóki jedna z jej warunków
 nie uruchomi się, wówczas wykonuje odpowiadający temu warunkowi przypadek
@@ -103,8 +105,8 @@ nie uruchomi się, wówczas wykonuje odpowiadający temu warunkowi przypadek
 
 * Domyślna selekcja
 
-Przypadek `default` w `select` jest uruchamiany w momencie gdy warunek
-żadnego z dostępnych przypadków nie został uruchomiony w danej chwili.
+Przypadek `default` w `select` jest uruchamiany w momencie gdy żaden z
+warunków dostępnych przypadków nie został uruchomiony w danej chwili.
 
 Użyj przypadku `default` by wysłać lub otrzymać wartość bez blokowania:
 
@@ -127,7 +129,7 @@ liczb. Przykładowo, poniżej mamy dwa drzewa binarne przechowujące ciąg
 
 Napisanie funkcji która sprawdza czy oba drzewa binarne przechowują ten
 sam ciąg liczb, w wielu języka jest bardzo skomplikowane. My użyjemy
-współbieżności i kanałów Go rozwiązać ten problem w prosty sposób.
+współbieżności i kanałów Go by rozwiązać ten problem w prosty sposób.
 
 Ten przykład używa pakietu `tree`, które definiuje typ:
 
@@ -178,17 +180,18 @@ Ale co jeśli nie potrzebujemy komunikacji? Co zrobić w sytuacji gdy chcemy
 by tylko jedna gorutyna mogła mieć w danym momencie dostęp do danej
 zmiennej, by unikać konfliktów między gorutynami?
 
-Ta koncepcja nosi nazwę jest _wzajemnego wykluczania_ (ang. mutual
+Ta koncepcja nosi nazwę _wzajemnego wykluczania_ (ang. mutual
 exclusion), a strukturę danych która pozwala nam z niej korzystać zwyczajowo
 nazywamy _mutex_.
 
-Biblioteka standardowa Go dostarcza wzajemne wykluczenie za pomocą typu
-[[https://golang.org/pkg/sync/#Mutex][`sync.Mutex`]] oraz jego dwóch metod:
+Biblioteka standardowa Go implementuje mechanizm wzajemnego wykluczania
+za pomocą typu [[https://golang.org/pkg/sync/#Mutex][`sync.Mutex`]]
+oraz jego dwóch metod:
 
 - `Lock`
 - `Unlock`
 
-Możemy napisać blok kodu który ma będzie wykonywany w trybie wzajemnego
+Możemy napisać blok kodu który będzie wykonywany w trybie wzajemnego
 wykluczania poprzez otoczenie go wywołaniami metod `Lock` i `Unlock`,
 tak jak zostało to pokazane w definicji metody `Inc`.
 
@@ -202,7 +205,7 @@ otwarty (ang. unlocked), tak jak widać to w definicji metody `Value`.
 W tym ćwiczeniu użyjemy współbieżności języka Go, by zrównoleglić
 działanie web crawlera.
 
-Zmodyfikuj funkcję `Crawl` by pobierała adresy URL w sposób równoległy, bez pobierania tego samego adresu URLa dwa razy.
+Zmodyfikuj funkcję `Crawl` by pobierała adresy URL w sposób równoległy, bez pobierania tego samego adresu URL dwa razy.
 
 
 _Podpowiedź_: możesz zapisywać pobrane adresy URL w mapie, jednak mapy
@@ -232,7 +235,7 @@ z samym językiem, może cię to zdziwić, ale
 [[https://golang.org/ref/spec][Language Spec]] (pl. specyfikacja języka)
 jest całkiem przyjemny w czytaniu.
 
-By lepiej poznać model wielobieżności języka Go, obejrzyj
+By lepiej poznać model współbieżności języka Go, obejrzyj
 [[https://www.youtube.com/watch?v=f6kdp27TYZs][Go Concurrency Patterns]]
 ([[https://talks.golang.org/2012/concurrency.slide][slajdy z prezentacji]])
 oraz
