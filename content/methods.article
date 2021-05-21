@@ -1,5 +1,5 @@
 Metody oraz interfejsy
-Ta lekcja pokrywa metody oraz interfejsy, konstrukty które definiują obiekty oraz ich zachowanie.
+Ta lekcja omawia metody oraz interfejsy, konstrukcje które definiują obiekty oraz ich zachowanie.
 
 Autorzy Go
 https://golang.org
@@ -7,60 +7,65 @@ https://golang.org
 * Metody
 
 Go nie posiada klas.
-Jednakże, możesz przypisać metody nazwanym typom.
+Jednakże, możesz definiować metody dla danych typów.
 
-Metoda to funkcja ze specjalnym argumentem _odbiornikiem_ (tzw. _receiver_)
+Metoda to funkcja ze specjalnym argumentem nazywanym _odbiorcą_
+(ang. _receiver_)
 
-Odbiornik pojawia się w swej własnej liście argumentów pomiędzy słowem `func` 
+Odbiorcę podajemy w jego własnej liście argumentów pomiędzy słowem `func`
 a nazwą metody.
 
-W tym przykładzie, metoda `Abs` posiada odbiornik typu `Vertex` nazwanym `v`.
+W tym przykładzie, metoda `Abs` posiada odbiorcę typu `Vertex` o nazwie `v`.
 
 .play methods/methods.go
 
 * Metody to funkcje
 
-Zapamiętaj: metoda to po prostu funkcja z odbiornikiem.
+Zapamiętaj: metoda to po prostu funkcja posiadają odbiorcę jako swój
+argument.
 
-Oto `Abs` zapisana jako regularna funkcja bez zmian w jej funkcjonalności.
+Tutaj mamy `Abs` zdefiniowany jako normalną funkcję bez zmian w jej
+funkcjonalności.
 
 .play methods/methods-funcs.go
 
 * Metody ciąg dalszy
 
-Możesz równierz zadeklarować metodę na nie-konstruktowych typach.
+Możesz również zadeklarować metodę na typach nie będących strukturami.
 
-W tym przykładzie, widzimy numeryczną wartość `MyFloat` wraz z metodą `Abs`.
+W tym przykładzie, widzimy typ numeryczny `MyFloat` wraz z metodą `Abs`.
 
-Metodę, możesz tylko zadeklarować z odbiornikiem którego typ zdefiniowany jest w tym
-samym pakiecie co metoda.
-Nie możesz zadeklarować metody z odbiornikiem którego typ zadeklarowany jest w innym pakiecie
-(to równierz dotyczy wbudowanych typów, takich jak `int`).
+Metodę możesz zadeklarować tylko dla odbiorcy którego typ jest zdefiniowany
+w tym samym pakiecie co metoda.
+Nie możesz zadeklarować metody dla odbiorcy którego typ jest zadeklarowany
+w innym pakiecie (dotyczy to w szczególności wbudowanych typów, takich jak
+`int`).
 
 .play methods/methods-continued.go
 
-* Odbiorniki wskaźnikowe
+* Odbiorcy wskaźników
 
-Możesz zadeklarować metody z odbiornikami wskaźnikowymi (tzw. pointer receivers).
+Możesz zadeklarować metody dla odbiorców wskaźników (ang. pointer receivers).
 
-To oznacza, że typ odbiornika ma składnię literału `*T` dla jakiegoś typu `T`.
-(Równierz, `T` nie może być wskaźnikiem takim jak na przykład `*int`.)
+To oznacza, że typ odbiorcy ma składnię literalną `*T` dla jakiegoś typu `T`.
+(Dodatkowo `T` sam nie może być wskaźnikiem, takim jak na przykład `*int`.)
 
-Na przykład, metoda `Scale` zdefiniowana jest na `*Vertex`.
+Na przykład, metoda `Scale` zdefiniowana jest dla typu `*Vertex`.
 
-Metody z odbiornikami wskaźnikowymi mogą zmieniać wartości które wskazuje odbiornik
+Metody z odbiorcami wskaźników mogą zmieniać wartości które wskazuje odbiorca
 (tak jak `Scale` robi to w tym przykładzie).
-Ponieważ metody często muszą zmieniać odbiornik, odbiorniki wskaźnikowe są dużo 
-częsciej używane niżeli odbiorniki wartości.
+Ponieważ metody często potrzebują zmieniać swojego odbiorcę, odbiorcy
+wskaźników są dużo częściej używani niż odbiorcy wartości.
 
-Spróbuj usunąć `*` z deklaracji funkcji `Scale` na lini 16 i zobacz jak zmieni się
-zachowanie programu.
+Spróbuj usunąć `*` z deklaracji funkcji `Scale` w linii 16 i zobacz jak
+zmieni się działanie programu.
 
-Z odbiornikiem wartości, metoda `Scale` operuje na podstawie kopii oryginalnej
-wartości `Vertex`.
-(Jest to takie samo zachowanie jak zachowanie funkcji co do każdego innego argumentu.)
-Metoda `Scale` musi posiadać odbiornik wskaźnikowy by zmienić wartość `Vertex` zadeklarowaną 
-w funkcji `main`.
+Metoda `Scale` zdefiniowana z odbiorcą wartości operuje na kopii wartości
+typu `Vertex`.
+(Jest to takie samo zachowanie jak w przypadku wszystkich innych argumentów
+funkcji.)
+Metoda `Scale` musi posiadać odbiorcę wskaźnika by móc zmienić wartość typu
+`Vertex` zadeklarowaną w funkcji `main`.
 
 .play methods/methods-pointers.go
 
@@ -68,183 +73,204 @@ w funkcji `main`.
 
 Tu widzimy metody `Abs` oraz `Scale` zapisane jako funkcje.
 
-Jeszcze raz spróbuj usunąć `*` z lini 16.
-Potrafisz dostrzec dlaczego zachowanie się zmieniło?
-Co jeszcze musiałeś zmienić by przykład się skompilowal?
+Jeszcze raz spróbuj usunąć `*` z linii 16.
+Czy potrafisz dostrzec dlaczego działanie programu się zmieniło?
+Co jeszcze powinieneś zmienić by przykład się skompilował?
 
-(Jeśli nie jesteś pewien, kontynuuj do następnej strony.)
+(Jeśli nie jesteś pewien, przejdź do następnej strony.)
 
 .play methods/methods-pointers-explained.go
 
-* Metody oraz wskaźnik pośredni
+* Metody oraz dereferencja wskaźników
 
-Porównując dwa poprzednie programy, mogłeś zauważyć że 
-funkcje z argumentem wskaźnikowym muszą przyjmować wskaźnik:
+Porównując dwa poprzednie programy, mogłeś zauważyć że
+funkcje z argumentem będącym wskaźnikiem mogą przyjmować tylko argumenty będące wskaźnikami:
 
 	var v Vertex
 	ScaleFunc(v, 5)  // Compile error!
 	ScaleFunc(&v, 5) // OK
 
-podczas gdy metody z odbiornikami wskaźnikowymi przyjmują wartość lub wskaźnik jako
-odbiornik gdy są wywołane:
+podczas gdy metody z odbiornikiem wskaźnika przyjmują jako swojego odbiorcę zarówno wartość jak i wskaźnik:
 
 	var v Vertex
 	v.Scale(5)  // OK
 	p := &v
 	p.Scale(10) // OK
 
-Dla wyrażenia `v.Scale(5)`, nawet jeśli `v` jest wartością a nie wskaźnikiem,
-metoda z wskaźnikiem odbiornika jest wywołana automatycznie.
-To znaczy, dla wygody, Go iterpretuje wyrażenie `v.Scale(5)` jako
-`(&v).Scale(5)` ponieważ metoda `Scale` posiada wskaźnik odbiornika.
+W instrukcji `v.Scale(5)`, nawet jeśli `v` jest wartością a nie wskaźnikiem,
+metoda z odbiorcą wskaźnika jest wywołana automatycznie.
+Dzieje się tak, ponieważ dla wygody programowania Go interpretuje instrukcję
+`v.Scale(5)` jako `(&v).Scale(5)`, gdyż metoda `Scale` posiada odbiorcę
+wskaźnika.
 
 .play methods/indirection.go
 
-* Metody oraz wskaźnik pośredni (2)
+* Metody oraz dereferencja wskaźników (2)
 
-To samo dzieje się w drugim kierunku.
+To samo dzieje się w odwrotnej sytuacji.
 
-Funkcje które przyjmują argument wartości muszą przyjąć wartość danego typu:
+Funkcje które przyjmują jako argument wartość, mogą być wywołane tylko
+z wartością danego typu:
 
 	var v Vertex
 	fmt.Println(AbsFunc(v))  // OK
 	fmt.Println(AbsFunc(&v)) // Compile error!
 
-podczas gdy metody z odbiornikami wartości przyjmują wartość lub wskaźnik jako 
-odbiornik gdy są wywołane:
+podczas gdy metody z odbiorcą wartości przyjmują zarówno wartość jaki
+i wskaźniki jako swojego odbiorcę, gdy są wywołane w następujący sposób:
 
 	var v Vertex
 	fmt.Println(v.Abs()) // OK
 	p := &v
 	fmt.Println(p.Abs()) // OK
 
-W tym przypadku, wywołanie metody `p.Abs()` jest interpretowane jako `(*p).Abs()`.
+W takiej sytuacji, wywołanie metody `p.Abs()` jest interpretowane jako
+`(*p).Abs()`.
 
 .play methods/indirection-values.go
 
-* Wybranie wartości jako wskaźnik odbiornika. 
+* Wybieranie pomiędzy odbiorcą wartości lub wskaźnika
 
-Istnieją dwa powody dla których warto używać wskaźnik odbiornika.
+Istnieją dwa powody dla których warto używać odbiorców wskaźników.
 
-Pierwszy to taki że metoda może zmodyfikować wartość którą wskazuje odbiornik.
+Pierwszy to taki że taka metoda może zmodyfikować wartość którą wskazuje
+odbiorca.
 
-Drugim powodem jest unikanie kopiowania wartości przy każdym wywołaniu metody.
-Jest to szczególnie wydajne gdy na przykład odbiornik jest dużą strukturą.
+Drugim powód jest taki, że unikamy kopiowania wartości przy każdym wywołaniu
+metody. To może być bardzo wydajna metoda pracy z danymi, jeśli na przykład
+odbiorca jest dużą strukturą.
 
-W tym przykładzie, `Scale` oraz `Abs` posiadają tryb odbiornika, `*Vertex`,
-nawet pomimo tego że metoda `Abs` nie modyfikuje swego odbiornika.
+W tym przykładzie, `Scale` oraz `Abs` posiadają typ odbiorcy `*Vertex`,
+pomimo tego że metoda `Abs` nie modyfikuje swego odbiorcy.
 
-Generalnie, wszystkie metody danego typu powinny mieć odbiornik wartości lub 
-wskaźnik odbiornika, lecz nie mieszanine obu.
-(Zobaczymy dlaczego na następnych stronach)
+W ogólny przypadku wszystkie metody zdefiniowane dla danego typu powinny
+mieć odbiorcę wartości albo odbiorcę wskaźnika, ale nie oba rodzaje
+odbiorcy na raz. (Dlaczego tak jest, zobaczymy na następnych stronach.)
 
 .play methods/methods-with-pointer-receivers.go
 
-* Interfejsy (tzw. interfaces)
+* Interfejsy (ang. interfaces)
 
-Typ interfejsu jest definiowany jako zestaw sygnatur metody.
+Typ klasy interfejs jest definiowany przez zbiór sygnatur jego metody.
 
-Wartość typu interfejsu może przetrzymywać jakąkolwiek wartość która implementuje te metody.
+Wartość o typie będącym konkretnym interfejsem może przechowywać
+jakąkolwiek wartość która implementuje te metody.
 
-*Uwaga:* W przykładowym kodzie jest błąd na lini 22.
-`Vertex` (wartość typu) nie implementuje `Abser` ponieważ
-metoda `Abs` jest zdefiniowana tylko na `*Vertex` (typ wskaźnika).
+*Uwaga:* W przykładowym kodzie jest błąd w linii 22.
+`Vertex` (typ wartości) nie implementuje `Abser`, ponieważ metoda `Abs`
+jest zdefiniowana tylko na `*Vertex` (jest to typ wskaźnik na `Vertex`).
 
 .play methods/interfaces.go
 
-* Interfejsy są implementowane niejawnie
+* Interfejsy są implementowane domyślnie
 
-Typ implementuje interfejs implementujac jego metody.
-Nie ma tutaj wyraźnej deklaracji intencji, takiej jak na przykład "implements".
+Typ implementuje interfejs implementując jego metody.
+Nie ma tutaj jawnej deklaracji tworzącej dany typ klasy interfejs, takiej
+jak na przykład „implements”.
 
-Niejawne interfejsy rozdzielają definicje interfejsu od jego implementacji,
-co sprawia, że poźniej mogą pojawić się w danym pakiecie bez wcześniejszego uzgodnienia.
+Domyślne tworzenie interfejsu rozdziela definicje interfejsu od jego
+implementacji, które mogą się potem pojawić w dowolnym pakiecie bez
+potrzeby wstępnej organizacji kodu.
 
 .play methods/interfaces-are-satisfied-implicitly.go
 
 * Wartości interfejsów
 
-O wartościach interfejsów można by pomyśleć jak o parze uporządkowanych zbiorów (tzw. tuple) które 
-składają się z wartości i konkretnego typu:
+Jeśli chodzi o szczegóły techniczne, o wartościach przyjmowanej przez
+interfejs można myśleć jak o krotce (ang. tuple) zawierającej wartość
+i konkretny typ:
 
 	(wartość, typ)
 
-Wartość interfejsu przetrzymuje wartość określonego rodzaju typu.
+Wartość interfejsu przechowuje wartość posiadającą określony konkretny typ.
 
-Wezwanie metody na wartości interfejsu, egzekwuje metode o tej samej nazwie na jej
-określonym typie.
+Wywołanie metody na wartości interfejsu, wykonuje metodę o tej samej nazwie
+zdefiniowaną dla typu zawartego w interfejsie.
 
 .play methods/interface-values.go
 
-* Wartości interfejsu z brakiem wartości (nil)
+* Wartości interfejsu przechowujące wartość `nil`
 
-Jeśli konkretna wartość w interfejsie posiada brak wartości,
-metoda zostanie wywołana z odbiornikiem bez wartości. 
+Jeśli konkretna wartość w interfejsie to `nil`,
+metoda zostanie wywołana z odbiorcą `nil`.
 
-W niektórych językach to wywołałoby `null pointer exception`,
-lecz w Go, często pisze się metody, które skutecznie radzą sobie 
-gdy są wywołane z odbiornikiem bez wartości (tak jak można zobaczyć w przykładzie obok, metodzie `M`).
+W niektórych językach wywołałoby to `null pointer exception`,
+lecz w Go często tworzymy metody, które skutecznie radzą sobie z sytuacją
+gdy są wywołane z odbiorcą `nil` (jako przykład można podać metodę `M`
+w kodzie obok).
 
-Zauważ, że interfejs który przetrzymuje wartość zawierającą nil, sam w sobie nie jest bez wartości.
+Zauważ, że interfejs który przechowuje jako wartość `nil`, sam nie jest
+reprezentowany przez `nil`.
 
 .play methods/interface-values-with-nil.go
 
-* Nilowe wartości intefejsów
+* Wartości `nil` interfejsów
 
-Wartość nilowa interfejsu nie przetrzymuje ani wartości ani żadnego konkretnego typu.
+Wartość `nil` interfejsu nie przetrzymuje ani konkretnej wartości ani
+żadnego konkretnego typu.
 
-Wezwanie metody na nilowym interfejsie powoduje błąd, ponieważ wewnątrz
-interfejsu nie ma typu który wskazałby którą dokładnie metode wywołać.
+Wezwanie metody na wartości interfejsu będącą `nil` powoduje błąd w czasie
+wykonania programu (ang. run-time error), ponieważ wewnątrz
+interfejsu nie ma typu który wskazałby którą dokładnie metodę należy wywołać.
 
 .play methods/nil-interface-values.go
 
-* Pusty intefejs
+* Pusty interfejs
 
-Interfejs który nie określa żadnej metody, nazwany jest pustym interfejsem:
+„Pusty interfejs” to typ interfejs który nie określa żadnej metody:
 
 	interface{}
 
 Pusty interfejs może przetrzymywać wartości każdego typu.
-(Każd typ implementuje co najmniej zero metod)
+(Każdy typ implementuje co najmniej zero metod.)
 
-Puste interfejsy używane są przez kod który obsługuje wartości nieznanych typów.
-Na przykład, `fmt.Print` przyjmuje jakakolwiek liczbę argumentów typu `interface{}`.
+Puste interfejsy używane są przez kod który obsługuje wartości nieznanych
+typów. Na przykład, `fmt.Print` przyjmuje jakakolwiek liczbę argumentów
+typu `interface{}`.
 
 .play methods/empty-interface.go
 
-* Asercje typów
+* Sprawdzanie typów (ang. type assertions)
 
-Asercja typu dostarcza dostęp do konkretnej wartości danej wartości interfejsu.
+Sprawdzanie typu pozwala uzyskać dostęp do wartości o konkretnym typie
+która jest zawarta w interfejsie.
 
 	t := i.(T)
 
-Instrukcja powyżej zakłada że wartość interfejsu `i` przetrzymuje konkretny typ `T`
-oraz przypisuje zasadniczą wartość `T` zmiennej `t`.
+Instrukcja powyżej zakłada że wartość interfejsu `i` zawiera konkretny
+typ `T` oraz przypisuje konkretną wartość interfejsu o typie `T` zmiennej
+`t`.
 
-Jeśli `i` nie posiada `T`, instrukcja spowoduje panikę(tzw. panic).
+Jeśli `i` nie zawiera typu `T`, instrukcja ta spowoduje wywołanie paniki
+(ang. panic).
 
-By przetestować czy interfejs posiada wartość specyficznego typu,
-asercja typu może zwrócić dwie wartości: wartość zasadniczą oraz
-wartość boolean która określa czy dana asercja osiągnęła sukces.
+By _przetestować_ czy interfejs zawiera wartość konkretnego typu,
+sprawdzenie typu może zwrócić dwie wartości: wartość zawartą w interfejsie
+oraz wartość typu bool która określa czy sprawdzenie typu dało wynik
+pozytywny.
 
 	t, ok := i.(T)
 
-Jeśli `i` posiada `T`, wtedy `t` będzie wartością zasadniczą a `ok` będzie prawdą (true).
+Jeśli `i` zawiera typ `T`, wtedy `t` będzie wartością zawartą w interfejsie
+a `ok` będzie miało wartość `true`.
 
-Jeśli jednak nie, `ok` będzie fałszem (false) a `t` będzie wartością zerową typu `T`,
-i nie będzie paniki.
+W przeciwnym wypadku, `ok` będzie miało wartość `false`, a `t` będzie miało
+wartością zerową typu `T`, zaś panika (ang. panic) nie zostanie wywołana.
 
-Zauważ podobieństwo między składnią powyżej jak tą która używana jest by czytać mapy.
+
+Zauważ podobieństwo między składnią powyżej i tą która jest używana by
+odczytać wartość z mapy.
 
 .play methods/type-assertions.go
 
-* Typ warunku wielokrotnego wyboru (tzw. switch)
+* Instrukcja switch typów (ang. switch)
 
-Switch jest konstruktem który pozwala na wiele asercji typów w serii.
+Switch typów jest konstrukcją który pozwala dokonać kilku sprawdzeń typów
+po kolei.
 
-Typ switch jest jak regularna instrukcja switch, jednak cases w typie switch
-specyfikują typy, nie wartości, wartości tych typów porównywane są z typami
-wartości przetrzymywanymi w danych wartościach interfejsu.
+Switch typów jest jak normalna instrukcja switch, jednak warunki w switch
+typów określają odpowiednie typy, a nie wartości. Wartości tych typów
+porównywane są z typem wartości zawartej w wartości interfejsu.
 
 	switch v := i.(type) {
 	case T:
@@ -252,45 +278,47 @@ wartości przetrzymywanymi w danych wartościach interfejsu.
 	case S:
 		// v ma typ S
 	default:
-		// brak zgody; v ma ten sam typ co i
+		// żaden warunek nie pasuje; v ma ten sam typ co i
 	}
 
-Deklaracja w typie switch ma tą samą składnię co typ asercji `i.(T)`,
-jednak specyficzny typ `T` jest zamieniony ze słowem kluczem `type`.
+Deklaracja w switch typów ma tą samą składnię co sprawdzenie typu `i.(T)`,
+jednak konkretny typ `T` jest zastąpiony słowem kluczowym `type`.
 
-Ta instrukcja switch sprawdza czy wartość interfesju `i`
-przetrzymuje wartość typu `T` lub `S`.
-W każdym `T` oraz `S`, zmienna `v` będzie typu 
-`T` lub `S` i przetrzyma wartość posiadaną przez `i`.
-W default case, zmienna `v` jest tego samego typu oraz wartości co
-wartość `i`.
+Ta instrukcja switch sprawdza czy wartość interfejsu `i` zawiera wartość
+typu `T` lub `S`. W przypadku warunków na `T` lub `S`, zmienna `v` przyjmie
+typ `T` lub `S` i przyjmie wartość zawartą w `i`. W przypadku warunku
+domyślnego (ang. default), zmienna `v` przyjmie ten sam typ klasy interfejs
+oraz tą samą wartość co `i`.
 
 .play methods/type-switches.go
 
 * Stringers
 
-Jednym z najbardziej wszechobecnym interfejsów jest [[//golang.org/pkg/fmt/#Stringer][`Stringer`]] zdefiniowany przez pakiet [[//golang.org/pkg/fmt/][`fmt`]].
+Jednym z najbardziej wszechobecnym interfejsów jest
+[[//golang.org/pkg/fmt/#Stringer][`Stringer`]] zdefiniowany przez pakiet
+[[//golang.org/pkg/fmt/][`fmt`]].
 
 	type Stringer interface {
 		String() string
 	}
 
-`Stringer` jest typem który może przedstawić się jako string. Pakiet `fmt`
-(i wiele innych) potrzebuje tego pakietu by wydrukować wartości.
+`Stringer` jest typem który może przedstawić samego siebie jako string.
+Pakiet `fmt` (i wiele innych) używa tego interfejsu by wypisywać wartości.
 
 .play methods/stringer.go
 
 * Ćwiczenie: Stringers
 
-Spraw by typ `IPAddr` implementował `fmt.Stringer` by wydrukować 4 ciągi liczb z kropkami.
+Spraw by typ `IPAddr` zaimplementował `fmt.Stringer` poprzez metodę
+wypisującą adres jako cztery liczby obdzielone kropkami.
 
-Na przykład, `IPAddr{1,`2,`3,`4}` powinien się wydrukować jako `"1.2.3.4"`.
+Na przykład, `IPAddr{1,`2,`3,`4}` powinien zostać wypisany jako `"1.2.3.4"`.
 
 .play methods/exercise-stringer.go
 
-* Błędy (tzw. errors)
+* Błędy (ang. errors)
 
-Programy Go wyrażają błedy poprzez wartości `error`.
+Błędy w Go to wartości typu `error`.
 
 Typ `error` jest wbudowanym interfejsem podobnym do `fmt.Stringer`:
 
@@ -298,10 +326,11 @@ Typ `error` jest wbudowanym interfejsem podobnym do `fmt.Stringer`:
 		Error() string
 	}
 
-(Tak samo jak w przypadku `fmt.Stringer`, pakiet `fmt` szuka interfejsu `error` gdy drukuje wartości.)
+(Tak samo jak w przypadku `fmt.Stringer`, pakiet `fmt` szuka interfejsu
+`error` gdy wypisuje wartości.)
 
-Funkcje często zwracają wartość `error`, a blok kodu który wywołuje funkcję powinien 
-dostarczać logikę która testuje czy `error` równa się `nil`.
+Funkcje często zwracają wartość `error`, a kod wywołujący funkcję powinien
+obsłużyć błąd, testując czy `error` jest równy `nil`.
 
 	i, err := strconv.Atoi("42")
 	if err != nil {
@@ -310,74 +339,99 @@ dostarczać logikę która testuje czy `error` równa się `nil`.
 	}
 	fmt.Println("Converted integer:", i)
 
-`error` o wartości nil oznacza sukces; `error` o wartości innej niż nil oznacza porażkę.
+`error` o wartości `nil` oznacza sukces; `error` o wartości innej niż `nil`
+oznacza porażkę.
 
 .play methods/errors.go
 
 * Ćwiecznie: Errors
 
-Skopiuj swoją funkcję `Sqrt` z [[/flowcontrol/8][wcześniejszego ćwiczenia]] i zmodyfikuj ją tak by zwracała równierz wartość `error`.
+Skopiuj swoją funkcję `Sqrt` z [[/flowcontrol/8][wcześniejszego ćwiczenia]]
+i zmodyfikuj ją tak by zwracała również wartość typu `error`.
 
-`Sqrt` powinna zwrócić wartość `error` inną niż nil, jeśli numer zwrócony będzie numerem ujemnym. 
+`Sqrt` powinna zwrócić wartość `error` inną niż `nil`, kiedy jej argument
+liczbowy będzie liczbą ujemną, gdyż funkcja ta nie pracuje z liczbami
+zespolonymi.
 
 Stwórz nowy typ
 
 	type ErrNegativeSqrt float64
 
-i spraw by był typem `error` po przez
+i spraw by był on interfejsem typu `error` poprzez implementację metody
 
 	func (e ErrNegativeSqrt) Error() string
 
-metodę, tak więc `ErrNegativeSqrt(-2).Error()` zwróci `"cannot`Sqrt`negative`number:`-2"`.
+Jako rezultat wywołania `ErrNegativeSqrt(-2).Error()` powinien zostać
+zwrócony string `"cannot`Sqrt`negative`number:`-2"`.
 
-*Uwaga:* Wywołanie `fmt.Sprint(e)` wewnątrz metody `Error` spowoduje że program wejdzie w nieskończoną pętle. Możesz tego uniknąć po przez konwersję `e`: `fmt.Sprint(float64(e))`. Dlaczego?
+*Uwaga:* Wywołanie `fmt.Sprint(e)` wewnątrz metody `Error` spowoduje że
+program wejdzie w nieskończoną pętle. Możesz tego uniknąć po dokonując
+konwersji `e`: `fmt.Sprint(float64(e))`. Spróbuj odpowiedzieć sobie,
+dlaczego tak jest?
 
-Zmień swoją funkcję `Sqrt` tak by zwróciła wartość `ErrNegativeSqrt` gdy otrzyma liczbę ujemną. 
+Zmień swoją funkcję `Sqrt` tak by zwracała wartość typu `ErrNegativeSqrt`
+gdy otrzyma jako argument liczbę ujemną.
 
 .play methods/exercise-errors.go
 
-* Czytniki (tzw. readers)
+* Czytniki (ang. readers)
 
-Pakiet `io` specyfikuje interfejs `io.Reader`,
-który pozwala na wczytanie wycinka danych.
+Pakiet `io` definiuje interfejs `io.Reader`, który pozwala czytać ze
+strumienia danych.
 
-Standardowa biblioteka Go zawiera [[https://golang.org/search?q=Read#Global][wiele implementacji]] tego właśnie interfejsu, pliki, połączenia sieciowe, kompresory, i inne.
+Standardowa biblioteka Go zawiera
+[[https://golang.org/search?q=Read#Global][wiele implementacji]] tego
+interfejsu, między innymi dla plików, połączenia sieciowych, kompresorów
+danych, szyfrów i innych.
 
-`io.Reader` interfejs zawiera metodę `Read`:
+`io.Reader` interfejs posiada metodę `Read`:
 	func (T) Read(b []byte) (n int, err error)
 
-`Read` populuje wycinek bitów danymi oraz zwraca ten właśnie wycinek bitów oraz error. 
-Zwraca error `io.EOF` gdy ciąg danych się kończy.  
+`Read` zapełnia odczytanymi danymi wycinek wskazujący na tablicę bajtów,
+zwraca zaś inta reprezentującego ilość przeczytanych bajtów właśnie
+oraz wartość typu `error`. Gdy `Read` dojdzie do końca strumienia danych
+zwraca błąd `io.EOF` (błąd końca pliku, ang. end of file error).
 
 Kod podany w przykładzie tworzy
 [[//golang.org/pkg/strings/#Reader][`strings.Reader`]]
-oraz konsumuje jego wynik, 8 bitów po kolei.
+oraz pobiera 8 bajtów ze strumienia przy każdym wywołaniu.
 
 .play methods/reader.go
 
 * Ćwiczenie: Readers
 
-Zaimplementuj typ `Reader` który emituje nieskończony łancuch charakterów ASCII
-`'A'`.
+Zaimplementuj typ `Reader` który wysyła nieskończony strumień zawierający
+tylko znak ASCII `'A'`.
 
 .play methods/exercise-reader.go
 
 * Ćwiczenie: rot13Reader
 
-Ogólnie przyjętym wzorem jest [[https://golang.org/pkg/io/#Reader][io.Reader]] w którym znajduje się kolejny `io.Reader`, modyfikujący w jakiś sposob łancuch danych.
+Często spotykanym schematem postępowania jest tworzenie interfejsu typu
+[[https://golang.org/pkg/io/#Reader][io.Reader]] wewnątrz którego znajduje
+się kolejny `io.Reader`, przy czym zewnętrzy interfejs posiada inne metody
+obsługujące strumień danych.
 
-Na przykład, funkcja [[https://golang.org/pkg/compress/gzip/#NewReader][gzip.NewReader]] przyjmuje `io.Reader` (łancuch skompresowanych danych) oraz zwraca `*gzip.Reader` który równierz implementuje `io.Reader` (lańcuch zdekompresowanych danych).
+Na przykład, funkcja
+[[https://golang.org/pkg/compress/gzip/#NewReader][gzip.NewReader]] bierze
+`io.Reader` (strumień skompresowanych danych) i zwraca `*gzip.Reader` który
+również implementuje `io.Reader` (strumień zdekompresowanych danych).
 
-Zaimplementuj `rot13Reader` który implementuje `io.Reader` oraz czyta z `io.Reader`, modyfikując łancuch po przez zaaplikowanie [[https://en.wikipedia.org/wiki/ROT13][rot13]] szyfru podstawieniowego do wszystkich charakterów alfabetycznych.
+Zaimplementuj `rot13Reader` który implementuje `io.Reader` oraz czyta z tego
+`io.Reader`, modyfikując otrzymany strumień po przez użycie szyfru
+podstawieniowego [[https://en.wikipedia.org/wiki/ROT13][rot13]]
+do wszystkich liter alfabetu.
 
-Typ `rot13Reader` jest już dla ciebie dostarczony.
-Spraw by był on `io.Reader` po przez implementacje jego metody `Read`. 
+Typ `rot13Reader` jest już dla ciebie zdefiniowany.
+Zrób z niego interfejs typu `io.Reader` po przez zaimplementowanie dla niego
+metody `Read`.
 
 .play methods/exercise-rot-reader.go
 
-* Obrazy (Images)
+* Obrazy (ang. images)
 
-[[https://golang.org/pkg/image/#Image][Pakiet image]] definiuje interfejs `Image`:
+[[https://golang.org/pkg/image/#Image][Pakiet `image`]] definiuje interfejs
+`Image`:
 
 	package image
 
@@ -387,32 +441,46 @@ Spraw by był on `io.Reader` po przez implementacje jego metody `Read`.
 		At(x, y int) color.Color
 	}
 
-*Uwaga*: `Rectangle` który zwraca wartość metody `Bounds` jest tak naprawde
-[[https://golang.org/pkg/image/#Rectangle][`image.Rectangle`]], ponieważ 
-jego deklaracja jest w środku pakietu `image`.
+*Uwaga*: Dokładniej rzecz biorąc typ wartości zwracanej przez metodę
+`Bounds` to nie `Rectangle`, lecz
+[[https://golang.org/pkg/image/#Rectangle][`image.Rectangle`]], ponieważ
+jego deklaracja znajduje się w pakiecie `image`.
 
-(Zobacz [[https://golang.org/pkg/image/#Image][tę dokumentację]] by dowiedzieć się więcej.)
+(Zobacz odpowiedni
+[[https://golang.org/pkg/image/#Image][fragment dokumentacji]] by dowiedzieć
+się więcej.)
 
-Typy `color.Color` oraz `color.Model` równierz są interfejsami, jednak zignorujemy ten fakt poprzez użycie predefiniowanych implementacji `color.RGBA` oraz `color.RGBAModel`. Te interfejsy oraz typy są specyfikowane przez [[https://golang.org/pkg/image/color/][pakiet image/color]].
+Typy `color.Color` oraz `color.Model` również są interfejsami, jednak
+zignorujemy ten fakt poprzez użycie zdefiniowanych wcześniej implementacji
+`color.RGBA` oraz `color.RGBAModel`. Te interfejsy oraz typy dany są
+zdefiniowane w pakiecie [[https://golang.org/pkg/image/color/][image/color]].
 
 .play methods/images.go
 
 * Ćwiczenie: Images
 
-Pamiętasz [[/moretypes/18][generator obrazów]] który napisałeś wcześniej? Spróbujmy napisać kolejny, tym razem zwróci on implementację `image.Image` zamiast wycinka danych.
+Pamiętasz [[/moretypes/18][generator obrazów]] który napisałeś wcześniej?
+Spróbujmy napisać kolejny, tym razem zamiast zwracać wycinek danych, zwróci
+on implementację interfejsu `image.Image`.
 
-Zdefiniuj swój własny typ `Image`, zaimplementuj [[https://golang.org/pkg/image/#Image][wymagane metody]], oraz wywołaj `pic.ShowImage`.
+Zdefiniuj swój własny typ `Image`, zaimplementuj
+[[https://golang.org/pkg/image/#Image][wymagane metody]], oraz wywołaj
+`pic.ShowImage`.
 
-`Bounds` powinny zwrócić `image.Rectangle`, jak na przykład `image.Rect(0,`0,`w,`h)`.
+Metoda `Bounds` powinna zwrócić wartość typu `image.Rectangle`, przykładowo
+`image.Rect(0,`0,`w,`h)`.
 
-`ColorModel` powinien zwrócić `color.RGBAModel`.
+Metoda `ColorModel` powinna zwrócić `color.RGBAModel`.
 
-`At` powinno zwrócić kolor; wartości `v` w poprzednim generatorze obrazów, w tym odpowiada `color.RGBA{v,`v,`255,`255}`.
+Metoda `At` powinna zwrócić kolor; wartości `v` w poprzednim generatorze
+obrazów odpowiada teraz wartość `color.RGBA{v,`v,`255,`255}`.
 
 .play methods/exercise-images.go
 
 * Gratulujemy!
 
-Ukończyłeś tą lekcję!
+Ukończyłeś tę lekcję!
 
-Możesz wrócić do listy [[/list][modułów]] by dowiedzieć się czego nauczyć się następnie, lub kontynuować do [[javascript:click('.next-page')][następnej lekcji]].
+Możesz wrócić do listy [[/list][modułów]] by zobaczyć czego więcej
+możesz się nauczyć, lub od razu przejść do
+[[javascript:click('.next-page')][następnej lekcji]].

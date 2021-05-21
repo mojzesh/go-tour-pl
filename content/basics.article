@@ -1,51 +1,50 @@
 Pakiety, zmienne, oraz funkcje.
-Naucz się podstawowych komponentów każdego programu Go.
+Naucz się podstawowych komponentów każdego programu napisanego w Go.
 
 Autorzy Go
 https://golang.org
 
-* Pakiety (tzw. Packages)
+* Pakiety (ang. packages)
 
-Każdy program Go jest stworzony z pakietów.
+Każdy program Go składa się z pakietów.
 
-Programy zaczynają się w pakiecie `main`.
+Programy zaczynają swoje wykonywanie od pakietu `main`.
 
-Ten program używa pakietów z zaimportowanymi ścieżkami `"fmt"` oraz `"math/rand"`.
+Ten program używa pakietów opisanych ścieżkami importowania `"fmt"` oraz `"math/rand"`.
 
-Umownie, deklaracja pakietu jest taka sama jak ostatni element z ścieżki importu. Na przykład, package `"math/rand"` zawiera pliki które zaczynają się od instrukcji `package`rand`.
+Zgodnie z przyjętą konwencją, nazwa pakietu jest taka sama jak ostatni element jego ścieżki importowania. Na przykład, pakiet `"math/rand"` zawiera pliki które zaczynają się od instrukcji `package rand`.
 
 #appengine: *Uwaga:* Środowisko w którym te programy są uruchamiane jest
 #appengine: deterministyczne, tak więc za każdym razem gdy puścisz program
-#appengine: `rand.Intn` zwróci tę samą wartość.
+#appengine: `rand.Intn` zwróci on tę samą wartość.
 #appengine:
-#appengine: (By zobaczyć inną liczbę, podłącz generator liczb; zobacz [[https://golang.org/pkg/math/rand/#Seed][`rand.Seed`]].
-#appengine: W playgroundzie czas jest stałą, więc będziesz musiał użyć czegoś innego do generatora.)
+#appengine: (By zobaczyć inną liczbę, ustaw odpowiednią wartość ziarna generatora liczb; zobacz [[https://golang.org/pkg/math/rand/#Seed][`rand.Seed`]].
+#appengine: W playgroundzie czas jest stały, więc będziesz musiał użyć innej wartości jako ziarna do generatora.)
 
 .play basics/packages.go
 
 * Importy (tzw. Imports)
 
-Ten kod grupuje importy w ścieżki importu które znajdują się w nawiasie. 
+Ten kod grupuje importy w zamknięte w nawiasach, „sformatowane” instrukcje importowania.
 
-Możesz równierz napisać wiele ścieżek importu osobno, na przykład:
+Możesz również napisać kilka osobnych instrukcji importowania, na przykład:
 
 	import "fmt"
 	import "math"
 
-Jednak dobrze jest używać importów uwzględnionych w nawiasie.
+Jednak częścią dobrego stylu programowania w Go jest używanie sformatowanych instrukcji importowania.
 
 .play basics/imports.go
 
-* Nazwy eksportowane (tzw. Exported names)
+* Nazwy eksportowane (ang. exported names)
 
-W Go, nazwa jest eksportowana gdy zaczyna się dużą literą. 
-Na przykład, `Pizza` jest nazwą exportowaną, tak samo jak `Pi`, które eksportowane
-jest z pakietu `math`.
+W Go nazwa jest eksportowana, gdy zaczyna się od dużej litery.
+Na przykład, `Pizza` jest nazwą eksportowaną, tak samo jak `Pi`, które jest eksportowane z pakietu `math`.
 
-`pizza` oraz `pi` nie zaczynają się dużą literą, więc nie są eksportowane.
+`pizza` oraz `pi` nie zaczynają się od dużej litery, więc nie są eksportowane.
 
-Gdy importujesz pakiety, możesz odnieść się tylko do ich nazw eksportowanych.
-Jakiekolwiek nazwy które nie są eksportowane, są nie dostępne poza pakietem.
+Gdy importujesz pakiety, możesz odnosić się tylko do nazw które eksportują.
+Wszystkie „nieeksportowane” nazwy nie są dostępne poza pakietem w którym zostały zdefiniowane.
 
 Uruchom kod. Zauważ jaki błąd zwrócił.
 
@@ -53,7 +52,7 @@ By naprawić ten błąd, zmień nazwę `math.pi` na `math.Pi` i spróbuj ponowni
 
 .play basics/exported-names.go
 
-* Funkcje (tzw. Functions)
+* Funkcje (ang. functions)
 
 Funkcja może przyjąć zero lub więcej argumentów.
 
@@ -61,65 +60,65 @@ W tym przykładzie, `add` przyjmuje dwa parametry o typie `int`.
 
 Zauważ że typ podany jest _po_ nazwie zmiennej.
 
-(By dowiedzieć się więcej dlaczego typy wyglądają tak a nie inaczej, zobacz [[https://blog.golang.org/gos-declaration-syntax][artykuł dotyczący składni deklaracji Go]].)
+(By dowiedzieć się więcej dlaczego typy wyglądają tak a nie inaczej, zobacz [[https://blog.golang.org/gos-declaration-syntax][artykuł dotyczący składni deklaracji w Go]].)
 
 .play basics/functions.go
 
 * Funkcje ciąg dalszy
 
-Gdy dwie lub więcej kolejnych parametrów funkcji są tego samego typu, możesz pominąć podanie typu na wszystkich parametrach, prócz ostatniego.
+Gdy dwa lub więcej kolejnych parametrów funkcji są tego samego typu, możesz pominąć podawanie typu po każdy z parametrów, umieszczając go tylko po ostatnim z nich.
 
-W tym przykładzie, skrócilismy:
+W tym przykładzie, skróciliśmy:
 
 	x int, y int
 
-na
+do
 
 	x, y int
 
 .play basics/functions-continued.go
 
-* Zwracanie wielu wyników
+* Zwracanie wielu wartości
 
-Funkcja może zwrócić jakąkolwiek liczbe rezultatów.
+Funkcja może zwrócić dowolną liczbę wartości.
 
-Funkcja `swap` zwraca dwa strings.
+Funkcja `swap` zwraca dwa stringi.
 
 .play basics/multiple-results.go
 
-* Nazwane wartości zwrotne
+* Nazwane wartości zwracane
 
-W Go wartości zwrócone mogą być nazwane. Jeśli są, są one traktowane jako zmienne zdefiniowane na samej górze funkcji. 
+W Go wartości zwracane mogą posiadać nazwy. Jeśli je mają, to są one traktowane jako zmienne zdefiniowane na samej górze funkcji.
 
-Nazwy tych zwrotnych powinny być użyte tak, by udokumentować znaczenie wartości zwrotnych.
+Nazwy wartości zwracanych powinny być tak dobrane, by wyjaśniały ich znaczenie.
 
-Instrukcja `return` bez żadnych argumentów zwraca wartości nazwane. Są one zwane "nagimi" zwrotami (tzw. "naked" return)
+Instrukcja `return` bez żadnych argumentów zwraca nazwane wartości. Mówimy wtedy o "nagiej" instrukcji return (ang. "naked" return)
 
-Instrukcje naked return powinny być używane tylko w krótkich funkcjach, tak jak w przykładzie podanym ponieważ mogą bardzo utrudnić czytelność w długich funkcjach.
+Naga instrukcja return powinna być używana tylko w krótkich funkcjach, takich jak ta w podanym przykładzie. W przeciwny razie jej użycie może pogorszyć czytelność długich funkcji.
 
 .play basics/named-results.go
 
-* Zmienne (tzw. variables)
+* Zmienne (ang. variables)
 
-Instrukcja `var` deklaruje listę zmiennych; tak jak w liście argumentów funkcji, typ jest ostatni.
+Instrukcja `var` deklaruje listę zmiennych; tak jak w liście argumentów funkcji typ podajemy na samym końcu.
 
 Instrukcja `var` może znajdować się na poziomie pakietu lub funkcji. W przykładzie obok widzimy obie sytuacje.
 
 .play basics/variables.go
 
-* Zmienne z inicjatorami
+* Zmienne z inicjalizatorami
 
-Deklaracja zmiennej może zawierać inicjator, jeden na każdą zmienną.
+Deklaracja zmiennej może zawierać inicjalizator, po jednym dla każdej zmiennej.
 
-Jeśli inicjator jest obecny, podanie typu jest zbędne; zmienna przyjmnie typ inicjatora.
+Jeśli inicjalizator jest obecny, podanie typu jest zbędne; zmienna przyjmie typ inicjalizatora.
 
 .play basics/variables-with-initializers.go
 
-* Deklarowanie krótkich zmiennych (tzw. short variables)
+* Krótkie deklaracje zmiennych (ang. short variable declarations)
 
-W środku funkcji, `:=` może zostać użyte zamiast deklaracji `var` z domniemanym typem.
+W środku funkcji możemy użyć składni deklaracji `:=` zamiast `var` z domniemanym typem.
 
-Poza funkcją, każda instrukcja rozpoczyna się od słowa klucza (`var`, `func`, i tak dalej), tak więc konstrukt `:=` jest nie dostępny.
+Poza funkcją, każda instrukcja rozpoczyna się od słowa kluczowego (`var`, `func`, i tak dalej), więc nie możemy tam używać składni `:=`.
 
 .play basics/short-variable-declarations.go
 
@@ -143,25 +142,25 @@ Podstawowe typy Go to:
 	complex64 complex128
 
 Przykład prezentuje zmienne różnych typów,
-oraz pakowanie zmiennych w bloki, tak samo jak 
-z instrukcjami importu.
+oraz to, że deklaracje zmiennych mogą być sformatowane w bloki, tak jak
+instrukcje importowania.
 
 
-Typy `int`, `uint`, oraz `uintptr` są zazwyczaj 32 bitowe na 32-bitowych systemach i 64 bitowe na systemach 64-bitowych.
-Gdy potrzebna ci wartość liczbowa, powinies użyć `int` chyba że z jakiegoś specyficznego powodu musisz użyć liczby całowitej lub liczby całkowitej bez znaku.
+Typy `int`, `uint`, oraz `uintptr` mają zazwyczaj długość 32 bitów na 32-bitowych systemach i 64 bitów na systemach 64-bitowych.
+Gdy potrzebna ci jest wartość całkowita, powinieneś użyć typu `int`, chyba że z jakiegoś powodu potrzebujesz liczby całkowitej o określonej długości bitów lub liczby całkowitej bez znaku.
 
 .play basics/basic-types.go
 
 * Wartości zerowe
 
-Zmienne zadeklarowane bez jawnej wartości początkowej posiadają 
+Zmienne zadeklarowane bez podania jawnej wartości początkowej przyjmują
 _wartość_zerową_.
 
-Wartość zerowa wynosi:
+Wartości zerowe wynoszą:
 
 - `0` dla typów numerycznych,
-- `false` dla wartości boolean, oraz
-- `""` (pusty string) dla strings.
+- `false` dla typu bool, oraz
+- `""` (pusty string) dla stringów.
 
 .play basics/zero.go
 
@@ -181,22 +180,22 @@ Lub, prościej:
 	f := float64(i)
 	u := uint(f)
 
-W przeciwieństwie do C, przydział pomiędzy poszczególnymi typami wymaga
+W przeciwieństwie do C, przypisywanie do zmiennej o innym typie wymaga
 jawnej konwersji.
-Spróbuj usunąć konwerjse `float64` lub `uint` w przykładzie obok i zobacz co się stanie.
+Spróbuj usunąć konwersje `float64` lub `uint` w przykładzie obok i zobacz co się stanie.
 
 .play basics/type-conversions.go
 
-* Wnioskowanie typów (tzw. Type inference)
+* Wnioskowanie typów (ang. type inference)
 
-Gdy deklarujemy zmienną bez określenia danego typu (poprzez użycie składni deklaracji `:=` lub `var`=`), typ zmiennej zostanie wywnioskowany po przez wartość po prawej stronie.
+Gdy deklarujemy zmienną bez określenia danego typu (poprzez użycie składni deklaracji `:=` lub `var`=`), typ zmiennej zostanie wywnioskowany na podstawie wartość po prawej stronie.
 
-Gdy typ wartości po prawej stronie jest określony, nowo powstała zmienna będzie właśnie tego typu:
+Gdy typ wartości po prawej stronie jest określony, nowo powstała zmienna będzie tego samego typu:
 
 	var i int
 	j := i // j jest int
 
-Gdy jednak wartość po prawej stronie zawiera stałą numeryczną bez podanego typu, nowa zmienna może być `int`, `float64`, lub `complex128`, w zależności od dokladności stałej:
+Jednak gdy wartość po prawej stronie jest stałą numeryczną bez podanego typu, nowa zmienna może mieć typ `int`, `float64`, lub `complex128`, w zależności od dokladności stałej:
 
 	i := 42           // int
 	f := 3.142        // float64
@@ -206,30 +205,30 @@ Spróbuj zmiennic wartość początkową `v` w przykładzie obok i zobacz jak wp
 
 .play basics/type-inference.go
 
-* Stałe (tzw. constants)
+* Stałe (ang. constants)
 
-Stałe są deklarowane podobnie jak zmienne, jednak z `const` słowo kluczem.
+Stałe są deklarowane podobnie jak zmienne, jednak z użyciem słowa kluczowego `const`.
 
-Stałe mogą być znakami, stringami, wartościami boolean, lub wartościami liczbowymi.
+Stałe mogą być znakami tekstowymi, stringami, wartościami boolowskimi lub liczbowymi.
 
 Stałe nie mogą być zadeklarowane przy pomocy składni `:=`.
 
 .play basics/constants.go
 
-* Stałe liczbowe (tzw. numeric constants)
+* Stałe liczbowe (ang. numeric constants)
 
-Stałe liczbowe to wartości o dużej precyzji.
+Stałe liczbowe to _wartości_ o dużej precyzji.
 
-Stała zaincjalizowana bez podania typu posiada typ wymagany przez kontekst.
+Stała zaincjalizowana bez podania typu, przyjmuje typ wymagany przez kontekst w którym jest użyta.
 
 Spróbuj wydrukować `needInt(Big)`.
 
-(`int` może maksymalnie przetrzymać 64-bitową liczbę, oraz czasem mniejszą.)
+(`int` może maksymalnie przechowywać liczbę całkowitą zajmującą 64 bity, w pewnych wypadkach tylko mniejszą.)
 
 .play basics/numeric-constants.go
 
 * Gratulujemy!
 
-Ukończyłeś tą lekcję!
+Ukończyłeś tę lekcję!
 
-Możesz wrócić do listy [[/list][modułów]] by dowiedzieć się czego nauczyć się następnie, lub kontynuować do [[javascript:click('.next-page')][następnej lekcji]].
+Możesz wrócić do listy [[/list][modułów]] by zobaczyć czego więcej możesz się nauczyć, lub od razu przejdź do [[javascript:click('.next-page')][następnej lekcji]].

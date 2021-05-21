@@ -1,98 +1,97 @@
 Witamy!
-Naucz się jak używać Przewodnika po Go: wliczając instruckcje jak nawigować poprzez różne lekcje oraz jak uruchomić kod.
+Naucz się jak używać Przewodnika po Go: wliczając w to instrukcje jak poruszać się między lekcjami oraz jak uruchomić kod.
 
 Autorzy Go
 https://golang.org
 
 * Cześć!
 
-Witamy w przewodniku [[https://golang.org/][języka Go]].
+Witamy w przewodniku po [[https://golang.org/][języku Go]].
 
-Przewodnik podzielony jest na listę modułów do których możesz przejść
+Przewodnik jest podzielony na listę modułów do których możesz przejść
 klikając na logo
-[[javascript:highlight(".logo")][Przewodnik po Go]] na górze po lewej stronie.
- 
-W dowolnym momencie mozesz równierz zobaczyć spis treści poprzez kliknięcie na [[javascript:highlightAndClick(".nav")][menu]] w prawym górnym rogu ekranu.
+[[javascript:highlight(".logo")][Przewodnik po Go]] w lewym górnym rogu ekranu.
 
-W przewodniku po Go zostaniesz pokierowany przez serię slidów i ćwiczeń które będziesz mógł wykonać.
+W dowolnym momencie możesz zobaczyć spis treści przewodnika poprzez kliknięcie na [[javascript:highlightAndClick(".nav")][menu]] w prawym górnym rogu ekranu.
 
-Możesz równierz nawigować poprzez slidy za pomocą przycisku
+W przewodniku po Go zapoznasz się z serią slajdów i ćwiczeń które będziesz mógł wykonać.
+
+Możesz również poruszać się między slajdami za pomocą przycisku
 
 - [[javascript:highlight(".prev-page")]["poprzedni"]] lub `PageUp` by wrócić do poprzedniej strony,
 
-- [[javascript:highlight(".next-page")]["nastepny"]] lub `PageDown` by przejść do następnej strony.
+- [[javascript:highlight(".next-page")]["następny"]] lub `PageDown` by przejść do następnej strony.
 
-Przewodnik jest interaktywny. Kliknij na
+Ten przewodnik jest interaktywny. Kliknij na
 [[javascript:highlightAndClick("#run")][Run]]
-(lub wciśnij `Shift` + `Enter`) by zkompilować i uruchomić swój program na
+(lub wciśnij `Shift` + `Enter`) by skompilować i uruchomić swój program na
 #appengine: zdalnym serwerze.
-Rezultat będzie wyświetlony poniżej kodu.
+Rezultat zostanie wyświetlony poniżej kodu.
 
-Te przykładowe programy demonstrują różne aspekty Go. Programy w Wycieczce po Go mają na celu być punktem startowym twych własnych eksperymentów z Go!
+Przykładowe programy tu zawarte prezentują różne aspekty języka Go. Programy w Przewodniku po Go są pomyślane jako punkt startowym twoich własnych eksperymentów z Go!
 
 Edytuj program i uruchom go ponownie.
 
 Gdy klikniesz na [[javascript:highlightAndClick("#format")][Format]]
-(skrót: `Ctrl` + `Enter`), tekst w edytorze zostanie zformatowany używając
-[[https://golang.org/cmd/gofmt/][gofmt]] narzędzia. Możesz włączyć lub wyłączyć podświetlanie
-kodu używając przycisku [[javascript:highlightAndClick(".syntax-checkbox")][syntax]].
+(skrót: `Ctrl` + `Enter`), tekst w edytorze zostanie sformatowany za pomocą narzędzia [[https://golang.org/cmd/gofmt/][gofmt]]. Możesz włączyć lub wyłączyć podświetlanie składni używając przycisku [[javascript:highlightAndClick(".syntax-checkbox")][syntax]].
 
 Gdy będziesz gotów by zacząć, naciśnij [[javascript:highlightAndClick(".next-page")][strzałka w prawo]] pod spodem lub wciśnij `PageDown`.
 
 .play welcome/hello.go
 
-* Go local
+* Go w lokalnych wersjach językowych
 
-Przewodnik po Go jest równierz dostępna w następujących językach:
+Przewodnik po Go jest również dostępny w następujących językach:
 
 - [[https://go-tour-br.appspot.com/][Brazilian Portuguese — Português do Brasil]]
 - [[https://go-tour-ca.appspot.com/][Catalan — Català]]
 - [[https://tour.go-zh.org/][Simplified Chinese — 中文（简体）]]
 - [[https://go-tour-cz.appspot.com/][Czech — Česky]]
+- [[https://tour.golang.org/welcome/1][English — English]]
 - [[https://go-tour-fr.appspot.com/][French — Français]]
 - [[https://go-tour-id2.appspot.com/][Indonesian — Bahasa Indonesia]]
 - [[https://go-tour-jp.appspot.com/][Japanese — 日本語]]
 - [[https://go-tour-ko.appspot.com/][Korean — 한국어]]
-- [[https://go-tour-pl1.ew.r.appspot.com/][Polish - Polski]]
-- [[https://go-tour-th.appspot.com/][Thai - ภาษาไทย]]
+- [[https://go-tour-th.appspot.com/][Thai — ภาษาไทย]]
 - [[https://go-tour-uz.appspot.com/][Uzbek — Ўзбекча]]
+
 
 Naciśnij przycisk [[javascript:highlightAndClick(".next-page")]["dalej"]] lub `PageDown` by kontynuować.
 
 #appengine: * Go offline (opcjonalne)
 #appengine:
-#appengine: Ten przewodnik jest równierz dostępny jako samodzielny program
-#appengine: bez dostępu do internetu.
-#appengine: 
+#appengine: Ten przewodnik jest również dostępny jako samodzielny program
+#appengine: nie wymagający dostępu do internetu.
 #appengine:
-#appengine: By go uruchomić go lokalnie, najpierw będziesz musiał
-#appengine: [[https://golang.org/doc/install][zainstalować Go]] i wtedy uruchomić poprzez:
+#appengine:
+#appengine: By uruchomić go lokalnie, będziesz musiał najpierw
+#appengine: [[https://golang.org/doc/install][zainstalować Go]], a następnie wykonać komendę:
 #appengine:
 #appengine:   go get golang.org/x/tour
 #appengine:
-#appengine: Puszczając wyżej wymienioną komendę, Przewodnik po Go zostanie pobrany i umieszczony w
-#appengine: [[https://golang.org/doc/code.html#Workspaces][workspace]] /`bin` folderze.
-#appengine: Gdy uruchomisz program, przeglądarka itnernetowa z twoją lokalną wersją Go otworzy się.
+#appengine: Po uruchomieniu powyższej komendy, Przewodnik po Go zostanie pobrana i umieszczona w folderze
+#appengine: [[https://golang.org/doc/code.html#Workspaces][workspace]] /`bin`.
+#appengine: Gdy uruchomisz program, otworzy się przeglądarka internetowa z twoją lokalną wersją Go.
 #appengine:
-#appengine: Oczywiście, możesz kontynuować z Wycieczką po Go używając tej strony!
+#appengine: Oczywiście, możesz kontynuować Przewodnik po Go używając tej strony!
 
 #appengine: * Go Playground
 #appengine:
-#appengine: Przewodnik po Go zbudowana jest na [[https://play.golang.org/][Go Playground]], który jest
+#appengine: Przewodnik po Go jest zbudowana na [[https://play.golang.org/][Go Playground]], który jest
 #appengine: serwisem webowym działającym na serwerach [[https://golang.org/][golang.org]].
 #appengine:
-#appengine: Serwis otrzymuje program Go, kompiluje go, linkuje, puszcza w
-#appengine: sanboxie, oraz zwraca rezultat.
+#appengine: Ten serwis odbiera program napisany w Go, kompiluje go, linkuje,
+#appengine: uruchamia go w sandboxie, a następnie zwraca rezultat.
 #appengine:
-#appengine: Sa równierz ograniczenia na programach które mogą być puszczone w playgroundzie:
+#appengine: Istnieją pewne ograniczenia na programy które są uruchamiane w playgroundzie:
 #appengine:
-#appengine: - W playgroundzie czas zaczyna się od 2009-11-10 23:00:00 UTC (ustalenie dlaczego ta data jest ważna, pozostawione zostaje dla czytającego). To sprawia że łatwiej zachować programy w pamięci podręcznej po przez dawanie im deterministycznego rezultatu.
+#appengine: - W playgroundzie czas jest liczony od 2009-11-10 23:00:00 UTC (ustalenia znaczenia tej daty, pozostawiamy jako proste ćwiczenie dla czytelnika). Sprawia to, że rezultat działania programów jest deterministyczny, więc łatwiej jest przechowywać je w pamięci podręcznej (cashować).
 #appengine:
-#appengine: - Są równierz ograniczenia na czasie wykonania oraz na zużyciu procesora oraz pamięci, program nie może komunikować się z innymi komputerami.
+#appengine: - Istnieją również ograniczenia na czas wykonania się programu oraz wykorzystanie przez niego procesora i pamięci. Programy nie może również łączyć się z innymi komputerami.
 #appengine:
 #appengine: Playground używa najnowszej stabilnej wersji Go.
 #appengine:
-#appengine: Przeczytaj "[[https://blog.golang.org/playground][Inside the Go Playground]]" by dowiedzieć się więcej.
+#appengine: By dowiedzieć się więcej przeczytaj "[[https://blog.golang.org/playground][Inside the Go Playground]]".
 #appengine:
 #appengine: .play welcome/sandbox.go
 
@@ -100,5 +99,4 @@ Naciśnij przycisk [[javascript:highlightAndClick(".next-page")]["dalej"]] lub `
 
 Właśnie ukończyłeś swój pierwszy moduł Przewodnika po Go!
 
-Kliknij na [[javascript:highlightAndClick(".logo")][Przewodnik po Go]] by dowiedzieć się czego więcej możesz się nauczyć, 
-lub odrazu przejdź do [[javascript:click('.next-page')][kolejnej lekcji]].
+Kliknij na [[javascript:highlightAndClick(".logo")][Przewodnik po Go]] by zobaczyć czego więcej możesz się nauczyć, lub od razu przejdź do [[javascript:click('.next-page')][następnej lekcji]].
