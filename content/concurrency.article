@@ -34,7 +34,7 @@ prymitywy stworzone w tym celu. (Zobacz następny slajd.)
 Kanały są posiadającymi typ „kablami” przez które możesz wysyłać
 i odbierać wartości używając operatora `<-`.
 
-	ch <- v    // Wysyłam v do kanału ch.
+	ch <- v    // Wysyła v do kanału ch.
 	v := <-ch  // Odbiera wartość z kanału ch
 	           // i przypisuje ją do v.
 
