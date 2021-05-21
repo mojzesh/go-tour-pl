@@ -142,7 +142,7 @@ Podstawowe typy Go to:
 	complex64 complex128
 
 Przykład prezentuje zmienne różnych typów,
-oraz to, że deklaracje zmiennych mogą być „sformatowane” w bloki, tak jak
+oraz to, że deklaracje zmiennych mogą być sformatowane w bloki, tak jak
 instrukcje importowania.
 
 
