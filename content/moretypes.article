@@ -50,7 +50,7 @@ Jednakże, ta notacja jest niezbyt poręczna, więc Go pozwala użyć nam nastę
 
 .play moretypes/struct-pointers.go
 
-* Struktur literalne (ang. struct literals)
+* Struktury literalne (ang. struct literals)
 
 Struktura literalna oznacza nowo utworzoną wartość zawierającą strukturę poprzez wymiennie wartości jej pól.
 
