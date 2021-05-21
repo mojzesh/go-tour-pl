@@ -92,7 +92,7 @@ W Go wartości zwracane mogą posiadać nazwy. Jeśli je mają, to są one trakt
 
 Nazwy wartości zwracanych powinny być tak dobrane, by wyjaśniały ich znaczenie.
 
-Instrukcja `return` bez żadnych argumentów zwraca nazwane wartości zwracana. Mówi wtedy on "nagiej" instrukcji return (ang. "naked" return)
+Instrukcja `return` bez żadnych argumentów zwraca nazwane wartości. Mówimy wtedy o "nagiej" instrukcji return (ang. "naked" return)
 
 Naga instrukcja return powinna być używana tylko w krótkich funkcjach, takich jak ta w podanym przykładzie. W przeciwny razie jej użycie może pogorszyć czytelność długich funkcji.
 
