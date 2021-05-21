@@ -90,7 +90,7 @@ funkcje z argumentem będącym wskaźnikiem mogą przyjmować tylko argumenty b�
 	ScaleFunc(v, 5)  // Compile error!
 	ScaleFunc(&v, 5) // OK
 
-podczas gdy metody z odbiornikiem wskaźnika przyjmują jako swojego odbiorcę zarówno wartość jaki i wskaźnik:
+podczas gdy metody z odbiornikiem wskaźnika przyjmują jako swojego odbiorcę zarówno wartość jak i wskaźnik:
 
 	var v Vertex
 	v.Scale(5)  // OK
