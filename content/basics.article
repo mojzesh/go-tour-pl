@@ -18,7 +18,7 @@ Zgodnie z przyjętą konwencją, nazwa pakietu jest taka sama jak ostatni elemen
 #appengine: deterministyczne, tak więc za każdym razem gdy puścisz program
 #appengine: `rand.Intn` zwróci on tę samą wartość.
 #appengine:
-#appengine: (By zobaczyć inną liczbę, ustaw odpowiednią wartość ziarna generator liczb; zobacz [[https://golang.org/pkg/math/rand/#Seed][`rand.Seed`]].
+#appengine: (By zobaczyć inną liczbę, ustaw odpowiednią wartość ziarna generatora liczb; zobacz [[https://golang.org/pkg/math/rand/#Seed][`rand.Seed`]].
 #appengine: W playgroundzie czas jest stały, więc będziesz musiał użyć innej wartości jako ziarna do generatora.)
 
 .play basics/packages.go
