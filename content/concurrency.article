@@ -19,9 +19,9 @@ rozpoczyna nową gorutynę:
 
 	f(x, y, z)
 
-Ewaluacja wartości `f`, `x`, `y` oraz `z` odbywa się w obecnej gorutynie, a wykonanie funkcji `f` już nowej.
+Ewaluacja wartości `f`, `x`, `y` oraz `z` odbywa się w obecnej gorutynie, a wykonanie funkcji `f` już w nowej.
 
-Gorutyny działają w tej samej przestrzeni adresowów, tak więc dostęp
+Gorutyny działają w tej samej przestrzeni adresowej, tak więc dostęp
 do współdzielonej pamięci musi być zsynchronizowany. Pakiet
 [[https://golang.org/pkg/sync/][`sync`]] dostarcza przydatnych prymitywów,
 jednak nie będziesz ich zbyt często potrzebował, ponieważ Go posiada inne
@@ -56,7 +56,7 @@ wyliczany jest wynik końcowy.
 
 * Kanały buforowane (ang. buffered channels)
 
-Kanały mogą być _buforowane_. Aby zaincjalizować kanał buforowany podaj
+Kanały mogą być _buforowane_. Aby zainicjalizować kanał buforowany podaj
 wielkość bufora jako drugi argument funkcji `make`:
 
 	ch := make(chan int, 100)
@@ -71,7 +71,7 @@ Zmodyfikuj przykład tak by przepełnić bufor i zobacz co się stanie.
 * Zakres i zamykanie kanału (ang. range, closing of channel)
 
 Wysyłający może zamknąć (ang. `close`) kanał by zasygnalizować, iż do
-danego kanału nie zostanie już przesłana żadna wartość. Odbierając może
+danego kanału nie zostanie już przesłana żadna wartość. Odbierający może
 sprawdzić czy kanał został zamknięty poprzez wprowadzenie drugiego parametru
 do wyrażenia odbierającego wartości z kanału:
 
@@ -88,7 +88,7 @@ wysłania czegoś przez zamknięty kanał wywoła panikę.
 
 *Kolejna*uwaga:* Kanały nie są jak pliki; zwykle nie musisz ich zamykać.
 Zamykanie kanałów jest niezbędne tylko wtedy, gdy odbiorca musi wiedzieć,
-że więcej wartość nie zostanie już nim przesłanych, na przykład po to by
+że więcej wartości nie zostanie już nim przesłanych, na przykład po to by
 mógł zakończyć działanie wyrażenia `range` w pętli.
 
 .play concurrency/range-and-close.go
@@ -99,7 +99,7 @@ Instrukcja `select` pozwala gorutynom oczekiwać w tym samym czasie na sygnał z
 
 Instrukcja `select` blokuje działanie gorutyny dopóki jedna z jej warunków
 nie uruchomi się, wówczas wykonuje odpowiadający temu warunkowi przypadek
-(ang. `case`). Jeśli kilka warunków zostaje uruchomionych jednocześnie, `select` wybiera losowo jeden dostępnych przypadków i wykonuje go.
+(ang. `case`). Jeśli kilka warunków zostaje uruchomionych jednocześnie, `select` wybiera losowo jeden z dostępnych przypadków i wykonuje go.
 
 .play concurrency/select.go
 
@@ -128,7 +128,7 @@ liczb. Przykładowo, poniżej mamy dwa drzewa binarne przechowujące ciąg
 .image /content/img/tree.png
 
 Napisanie funkcji która sprawdza czy oba drzewa binarne przechowują ten
-sam ciąg liczb, w wielu języka jest bardzo skomplikowane. My użyjemy
+sam ciąg liczb, w wielu językach jest bardzo skomplikowane. My użyjemy
 współbieżności i kanałów Go by rozwiązać ten problem w prosty sposób.
 
 Ten przykład używa pakietu `tree`, które definiuje typ:
@@ -161,7 +161,7 @@ Następnie odczytaj i wypisz 10 wartości z kanału `ch`. Powinny być to liczby
 1, 2, 3, ..., 10.
 
 *3.* Zaimplementuj funkcję `Same` używając `Walk` by sprawdzić czy `t1`
-i `t2` posiadają tę same wartości.
+i `t2` posiadają te same wartości.
 
 *4.* Przetestuj funkcję `Same`.
 
@@ -173,7 +173,7 @@ Dokumentacja pakietu `Tree` jest dostępna [[https://godoc.org/golang.org/x/tour
 
 * sync.Mutex
 
-Widzieliśmy jak doskonałym narzędzie do komunikowania się pomiędzy
+Widzieliśmy jak doskonałym narzędziem do komunikowania się pomiędzy
 gorutynami są kanały.
 
 Ale co jeśli nie potrzebujemy komunikacji? Co zrobić w sytuacji gdy chcemy
@@ -208,7 +208,7 @@ działanie web crawlera.
 Zmodyfikuj funkcję `Crawl` by pobierała adresy URL w sposób równoległy, bez pobierania tego samego adresu URL dwa razy.
 
 
-_Podpowiedź_: możesz zapisywać pobrane adresy URL w mapie, jednak mapy
+_Podpowiedź_: możesz zapisywać pobrane adresy URL w mapie, jednak map
 samych w sobie nie można używać w sposób bezpieczny, gdy program jest
 wykonywany w sposób współbieżny!
 
@@ -222,7 +222,7 @@ wykonywany w sposób współbieżny!
 #appengine: Gdy już masz zainstalowane Go, to
 [[https://golang.org/doc/][Dokumentacja Go]] jest świetnym miejscem by
 #appengine: kontynuować naukę.
-start.
+zacząć naukę.
 Zawiera odnośniki, tutoriale, filmy video i dużo więcej.
 
 By dowiedzieć się jak zorganizować i jak pracować z kodem w Go, zobacz
@@ -233,7 +233,7 @@ Jeśli potrzebujesz pomocy z biblioteką standardową, zobacz
 [[https://golang.org/pkg/][package reference]]. Jeśli potrzebujesz pomocy
 z samym językiem, może cię to zdziwić, ale
 [[https://golang.org/ref/spec][Language Spec]] (pl. specyfikacja języka)
-jest całkiem przyjemny w czytaniu.
+jest całkiem przyjemna w czytaniu.
 
 By lepiej poznać model współbieżności języka Go, obejrzyj
 [[https://www.youtube.com/watch?v=f6kdp27TYZs][Go Concurrency Patterns]]
@@ -246,13 +246,13 @@ oraz przeczytaj
 
 By rozpocząć pisanie aplikacji webowych, zobacz
 [[https://vimeo.com/53221558][A simple programming environment]]
-([[https://talks.golang.org/2012/simple.slide][slidy]])
+([[https://talks.golang.org/2012/simple.slide][slajdy]])
 oraz przeczytaj tutorial
 [[https://golang.org/doc/articles/wiki/][Writing Web Applications]].
 
 Przewodnik po
 kodzie [[https://golang.org/doc/codewalk/functions/][First Class Functions in Go]]
-pokazuję funkcji w Go z ciekawej perspektywy.
+pokazuje funkcje w Go z ciekawej perspektywy.
 
 Strona [[https://blog.golang.org/][Go Blog]] posiada duże archiwum
 merytorycznych artykułów dotyczących Go.

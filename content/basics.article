@@ -66,7 +66,7 @@ Zauważ że typ podany jest _po_ nazwie zmiennej.
 
 * Funkcje ciąg dalszy
 
-Gdy dwa lub więcej kolejnych parametrów funkcji są tego samego typu, możesz pominąć podawanie typu po każdy z parametrów, umieszczając go tylko po ostatnim z nich.
+Gdy dwa lub więcej kolejnych parametrów funkcji są tego samego typu, możesz pominąć podawanie typu po każdym z parametrów, umieszczając go tylko po ostatnim z nich.
 
 W tym przykładzie, skróciliśmy:
 
@@ -188,20 +188,20 @@ Spróbuj usunąć konwersje `float64` lub `uint` w przykładzie obok i zobacz co
 
 * Wnioskowanie typów (ang. type inference)
 
-Gdy deklarujemy zmienną bez określenia danego typu (poprzez użycie składni deklaracji `:=` lub `var`=`), typ zmiennej zostanie wywnioskowany na podstawie wartość po prawej stronie.
+Gdy deklarujemy zmienną bez określenia danego typu (poprzez użycie składni deklaracji `:=` lub `var`=`), typ zmiennej zostanie wywnioskowany na podstawie wartości po prawej stronie.
 
 Gdy typ wartości po prawej stronie jest określony, nowo powstała zmienna będzie tego samego typu:
 
 	var i int
 	j := i // j jest int
 
-Jednak gdy wartość po prawej stronie jest stałą numeryczną bez podanego typu, nowa zmienna może mieć typ `int`, `float64`, lub `complex128`, w zależności od dokladności stałej:
+Jednak gdy wartość po prawej stronie jest stałą numeryczną bez podanego typu, nowa zmienna może mieć typ `int`, `float64`, lub `complex128`, w zależności od dokładności stałej:
 
 	i := 42           // int
 	f := 3.142        // float64
 	g := 0.867 + 0.5i // complex128
 
-Spróbuj zmiennic wartość początkową `v` w przykładzie obok i zobacz jak wpływa to na typ zmiennej.
+Spróbuj zmienić wartość początkową `v` w przykładzie obok i zobacz jak wpływa to na typ zmiennej.
 
 .play basics/type-inference.go
 
@@ -219,7 +219,7 @@ Stałe nie mogą być zadeklarowane przy pomocy składni `:=`.
 
 Stałe liczbowe to _wartości_ o dużej precyzji.
 
-Stała zaincjalizowana bez podania typu, przyjmuje typ wymagany przez kontekst w którym jest użyta.
+Stała zainicjalizowana bez podania typu, przyjmuje typ wymagany przez kontekst w którym jest użyta.
 
 Spróbuj wydrukować `needInt(Big)`.
 

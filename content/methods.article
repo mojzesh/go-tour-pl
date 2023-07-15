@@ -87,7 +87,7 @@ Porównując dwa poprzednie programy, mogłeś zauważyć że
 funkcje z argumentem będącym wskaźnikiem mogą przyjmować tylko argumenty będące wskaźnikami:
 
 	var v Vertex
-	ScaleFunc(v, 5)  // Compile error!
+	ScaleFunc(v, 5)  // Błąd kompilacji!
 	ScaleFunc(&v, 5) // OK
 
 podczas gdy metody z odbiornikiem wskaźnika przyjmują jako swojego odbiorcę zarówno wartość jak i wskaźnik:
@@ -114,9 +114,9 @@ z wartością danego typu:
 
 	var v Vertex
 	fmt.Println(AbsFunc(v))  // OK
-	fmt.Println(AbsFunc(&v)) // Compile error!
+	fmt.Println(AbsFunc(&v)) // Błąd kompilacji!
 
-podczas gdy metody z odbiorcą wartości przyjmują zarówno wartość jaki
+podczas gdy metody z odbiorcą wartości przyjmują zarówno wartość jak
 i wskaźniki jako swojego odbiorcę, gdy są wywołane w następujący sposób:
 
 	var v Vertex
@@ -136,14 +136,14 @@ Istnieją dwa powody dla których warto używać odbiorców wskaźników.
 Pierwszy to taki że taka metoda może zmodyfikować wartość którą wskazuje
 odbiorca.
 
-Drugim powód jest taki, że unikamy kopiowania wartości przy każdym wywołaniu
+Drugi powód jest taki, że unikamy kopiowania wartości przy każdym wywołaniu
 metody. To może być bardzo wydajna metoda pracy z danymi, jeśli na przykład
 odbiorca jest dużą strukturą.
 
 W tym przykładzie, `Scale` oraz `Abs` posiadają typ odbiorcy `*Vertex`,
 pomimo tego że metoda `Abs` nie modyfikuje swego odbiorcy.
 
-W ogólny przypadku wszystkie metody zdefiniowane dla danego typu powinny
+W ogólnym przypadku wszystkie metody zdefiniowane dla danego typu powinny
 mieć odbiorcę wartości albo odbiorcę wskaźnika, ale nie oba rodzaje
 odbiorcy na raz. (Dlaczego tak jest, zobaczymy na następnych stronach.)
 
@@ -209,7 +209,7 @@ reprezentowany przez `nil`.
 Wartość `nil` interfejsu nie przetrzymuje ani konkretnej wartości ani
 żadnego konkretnego typu.
 
-Wezwanie metody na wartości interfejsu będącą `nil` powoduje błąd w czasie
+Wywołanie metody na wartości interfejsu będącą `nil` powoduje błąd w czasie
 wykonania programu (ang. run-time error), ponieważ wewnątrz
 interfejsu nie ma typu który wskazałby którą dokładnie metodę należy wywołać.
 
@@ -217,7 +217,7 @@ interfejsu nie ma typu który wskazałby którą dokładnie metodę należy wywo
 
 * Pusty interfejs
 
-„Pusty interfejs” to typ interfejs który nie określa żadnej metody:
+„Pusty interfejs” to typ interfejsu który nie określa żadnej metody:
 
 	interface{}
 
@@ -225,7 +225,7 @@ Pusty interfejs może przetrzymywać wartości każdego typu.
 (Każdy typ implementuje co najmniej zero metod.)
 
 Puste interfejsy używane są przez kod który obsługuje wartości nieznanych
-typów. Na przykład, `fmt.Print` przyjmuje jakakolwiek liczbę argumentów
+typów. Na przykład, `fmt.Print` przyjmuje jakąkolwiek liczbę argumentów
 typu `interface{}`.
 
 .play methods/empty-interface.go
@@ -294,7 +294,7 @@ oraz tą samą wartość co `i`.
 
 * Stringers
 
-Jednym z najbardziej wszechobecnym interfejsów jest
+Jednym z najbardziej wszechobecnych interfejsów jest
 [[//golang.org/pkg/fmt/#Stringer][`Stringer`]] zdefiniowany przez pakiet
 [[//golang.org/pkg/fmt/][`fmt`]].
 
@@ -310,7 +310,7 @@ Pakiet `fmt` (i wiele innych) używa tego interfejsu by wypisywać wartości.
 * Ćwiczenie: Stringers
 
 Spraw by typ `IPAddr` zaimplementował `fmt.Stringer` poprzez metodę
-wypisującą adres jako cztery liczby obdzielone kropkami.
+wypisującą adres jako cztery liczby oddzielone kropkami.
 
 Na przykład, `IPAddr{1,`2,`3,`4}` powinien zostać wypisany jako `"1.2.3.4"`.
 
@@ -334,13 +334,13 @@ obsłużyć błąd, testując czy `error` jest równy `nil`.
 
 	i, err := strconv.Atoi("42")
 	if err != nil {
-		fmt.Printf("couldn't convert number: %v\n", err)
+		fmt.Printf("nie mogłem przekonwertować liczby: %v\n", err)
 		return
 	}
-	fmt.Println("Converted integer:", i)
+	fmt.Println("Przekonwertowany integer:", i)
 
 `error` o wartości `nil` oznacza sukces; `error` o wartości innej niż `nil`
-oznacza porażkę.
+oznacza niepowodzenie.
 
 .play methods/errors.go
 
@@ -350,8 +350,8 @@ Skopiuj swoją funkcję `Sqrt` z [[/flowcontrol/8][wcześniejszego ćwiczenia]]
 i zmodyfikuj ją tak by zwracała również wartość typu `error`.
 
 `Sqrt` powinna zwrócić wartość `error` inną niż `nil`, kiedy jej argument
-liczbowy będzie liczbą ujemną, gdyż funkcja ta nie pracuje z liczbami
-zespolonymi.
+liczbowy będzie liczbą ujemną, gdyż funkcja ta nie obsługuje liczb
+zespolonych.
 
 Stwórz nowy typ
 
@@ -365,7 +365,7 @@ Jako rezultat wywołania `ErrNegativeSqrt(-2).Error()` powinien zostać
 zwrócony string `"cannot`Sqrt`negative`number:`-2"`.
 
 *Uwaga:* Wywołanie `fmt.Sprint(e)` wewnątrz metody `Error` spowoduje że
-program wejdzie w nieskończoną pętle. Możesz tego uniknąć po dokonując
+program wejdzie w nieskończoną pętlę. Możesz tego uniknąć dokonując
 konwersji `e`: `fmt.Sprint(float64(e))`. Spróbuj odpowiedzieć sobie,
 dlaczego tak jest?
 
@@ -381,14 +381,14 @@ strumienia danych.
 
 Standardowa biblioteka Go zawiera
 [[https://golang.org/search?q=Read#Global][wiele implementacji]] tego
-interfejsu, między innymi dla plików, połączenia sieciowych, kompresorów
+interfejsu, między innymi dla plików, połączeń sieciowych, kompresorów
 danych, szyfrów i innych.
 
 `io.Reader` interfejs posiada metodę `Read`:
 	func (T) Read(b []byte) (n int, err error)
 
 `Read` zapełnia odczytanymi danymi wycinek wskazujący na tablicę bajtów,
-zwraca zaś inta reprezentującego ilość przeczytanych bajtów właśnie
+zwraca zaś inta reprezentującego ilość przeczytanych właśnie bajtów
 oraz wartość typu `error`. Gdy `Read` dojdzie do końca strumienia danych
 zwraca błąd `io.EOF` (błąd końca pliku, ang. end of file error).
 
@@ -418,12 +418,12 @@ Na przykład, funkcja
 również implementuje `io.Reader` (strumień zdekompresowanych danych).
 
 Zaimplementuj `rot13Reader` który implementuje `io.Reader` oraz czyta z tego
-`io.Reader`, modyfikując otrzymany strumień po przez użycie szyfru
+`io.Reader`, modyfikując otrzymany strumień poprzez użycie szyfru
 podstawieniowego [[https://en.wikipedia.org/wiki/ROT13][rot13]]
 do wszystkich liter alfabetu.
 
 Typ `rot13Reader` jest już dla ciebie zdefiniowany.
-Zrób z niego interfejs typu `io.Reader` po przez zaimplementowanie dla niego
+Zrób z niego interfejs typu `io.Reader` poprzez zaimplementowanie dla niego
 metody `Read`.
 
 .play methods/exercise-rot-reader.go

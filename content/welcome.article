@@ -26,9 +26,10 @@ Ten przewodnik jest interaktywny. Kliknij na
 [[javascript:highlightAndClick("#run")][Run]]
 (lub wciśnij `Shift` + `Enter`) by skompilować i uruchomić swój program na
 #appengine: zdalnym serwerze.
+twoim komputerze.
 Rezultat zostanie wyświetlony poniżej kodu.
 
-Przykładowe programy tu zawarte prezentują różne aspekty języka Go. Programy w Przewodniku po Go są pomyślane jako punkt startowym twoich własnych eksperymentów z Go!
+Przykładowe programy tu zawarte prezentują różne aspekty języka Go. Programy w Przewodniku po Go są pomyślane jako punkt startowy twoich własnych eksperymentów z Go!
 
 Edytuj program i uruchom go ponownie.
 

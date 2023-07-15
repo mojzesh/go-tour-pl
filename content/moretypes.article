@@ -18,7 +18,7 @@ Typ `*T` to wskaźnik do wartości o typie `T`. Jego wartość zerowa wynosi `ni
 	i := 42
 	p = &i
 
-Operator `*` oznacza wartość wskazywaną w pamięci przez dany wskaźnika.
+Operator `*` oznacza wartość wskazywaną w pamięci przez dany wskaźnik.
 
 	fmt.Println(*p) // odczytuje wartość i poprzez wskaźnik p
 	*p = 21         // ustawia wartość i poprzez wskaźnik p
@@ -52,9 +52,9 @@ Jednakże, ta notacja jest niezbyt poręczna, więc Go pozwala użyć nam nastę
 
 * Struktury literalne (ang. struct literals)
 
-Struktura literalna oznacza nowo utworzoną wartość zawierającą strukturę poprzez wymiennie wartości jej pól.
+Struktura literalna oznacza nowo utworzoną wartość zawierającą strukturę poprzez wymienienie wartości jej pól.
 
-Możesz przypisać wartości tylko części pól, poprzez użycie składni `Name:`. Porządek nazwany pól nie ma znaczenia.
+Możesz przypisać wartości tylko części pól, poprzez użycie składni `Name:`. Porządek nazwanych pól nie ma znaczenia.
 
 Prefiks `&` zwraca wskaźnik do wartości struktury.
 
@@ -131,7 +131,7 @@ Gdy tworzymy wycinki, można pominąć dolną lub górną granice, wtedy zostan�
 
 Wartość domyślna dla dolnej granicy wynosi zero, wartość granicy górnej jest równa długości tablicy.
 
-Dla poniżej tablicy:
+Dla poniższej tablicy:
 
 	var a [10]int
 
@@ -153,7 +153,7 @@ Długość (ang. len) wycinka to liczba elementów na które wskazuje.
 
 Pojemność (ang. cap) wycinka to liczba elementów tablicy na którą dany wycinek wskazuje, licząc od pierwszego elementu wycinka.
 
-Długość i pojemność wycinka `s` może zostać uzyskana po przez użycie wyrażeń
+Długość i pojemność wycinka `s` może zostać uzyskana poprzez użycie wyrażeń
 `len(s)` oraz `cap(s)`.
 
 Jeśli tylko dany wycinek posiada odpowiednią pojemność, możemy zwiększyć jego długość poprzez wycięcie z niego kolejnego wycinka (ang. re-slicing).
@@ -208,7 +208,7 @@ Pierwszym parametrem funkcji `append` jest wycinek `s` o typie `T`, pozostałe p
 
 Rezultatem funkcji `append` jest wycinek zawierający wszystkie elementy oryginalnego wycinka oraz dodatkowe elementy.
 
-Jeśli tablica na którą wskazuje `s` jest zbyt mała by pomieścić wszystkie wartości, nowa, większa tablica zostanie utworzona. Zwrócony wycinek będzie wskazywał na nowo przydzieloną tablice.
+Jeśli tablica na którą wskazuje `s` jest zbyt mała by pomieścić wszystkie wartości, zostanie utworzona nowa, większa tablica. Zwrócony wycinek będzie wskazywał na nowo przydzieloną tablice.
 
 (By dowiedzieć się więcej o wycinkach, przeczytaj artykuł [[https://blog.golang.org/go-slices-usage-and-internals][Slices: usage and internals]]).
 
@@ -239,7 +239,7 @@ Jeśli chcesz otrzymać tylko indeks, możesz zupełnie pominąć wartość elem
 
 * Ćwiczenie: Wycinki
 
-Zaimplementuj funkcję `Pic`. Powinna ona zwrócić wycinek o długości `dy`, którego elementami są wycinki zawierające `dx` 8-bitowych liczb całkowitych bez znaku (ang. 8-bit unisgned integer). Gdy uruchomisz program, wyświetli on obrazek, interpretując wartości intów w skali szarości (tak naprawdę, to w skali „niebieskości”).
+Zaimplementuj funkcję `Pic`. Powinna ona zwrócić wycinek o długości `dy`, którego elementami są wycinki zawierające `dx` 8-bitowych liczb całkowitych bez znaku (ang. 8-bit unsigned integer). Gdy uruchomisz program, wyświetli on obrazek, interpretując wartości intów w skali szarości (tak naprawdę, to w skali „niebieskości”).
 
 Wybór obrazka należy do ciebie. Przykładowe funkcje które dają ciekawy rezultat to: `(x+y)/2`, `x*y`, and `x^y`.
 
@@ -256,7 +256,7 @@ Mapa przyporządkowuje kluczom odpowiednie wartości.
 Wartość zerowa mapy to `nil`.
 Mapa `nil` nie posiada kluczy i żaden klucz nie może być do niej dodany.
 
-Funkcja `make` zwraca mapę danego typu, zaincjalizowaną i gotową do użytku.
+Funkcja `make` zwraca mapę danego typu, zainicjalizowaną i gotową do użytku.
 
 .play moretypes/maps.go
 
@@ -290,11 +290,11 @@ Sprawdzenie czy mapa zawiera dany klucz poprzez przypisanie wyniku do dwóch zmi
 
 	elem, ok = m[key]
 
-Jeśli mapa `m` zawiera klucz `key` mapie `m`, `ok` ma wartość `true`. Jeśli nie, `ok` jest równe `false`.
+Jeśli mapa `m` zawiera klucz `key` w mapie `m`, `ok` ma wartość `true`. Jeśli nie, `ok` jest równe `false`.
 
 Jeśli mapa nie zawiera klucza `key`, wówczas `elem` przyjmuje wartość zerową typu elementu mapy.
 
-*Uwaga:* Jeśli `elem` lub `ok` nie zostały zadeklarowane, możesz użyć krótkiej formy deklaracji.
+*Uwaga:* Jeśli `elem` lub `ok` nie zostały zadeklarowane, możesz użyć krótkiej formy deklaracji:
 
 	elem, ok := m[key]
 
@@ -302,7 +302,7 @@ Jeśli mapa nie zawiera klucza `key`, wówczas `elem` przyjmuje wartość zerow�
 
 * Ćwiczenie: Mapy
 
-Zaimplementuj `WordCount`.  Program powinien zwrócić mapę która policzy ilość wystąpień każdego "wyrazu" w stringu `s`. Funkcja `wc.Test` uruchamia test twojej funkcji i wypisuje na ekranie "success" (pl. sukces) lub "failure" (pl. porażka).
+Zaimplementuj `WordCount`.  Program powinien zwrócić mapę która policzy ilość wystąpień każdego "wyrazu" w stringu `s`. Funkcja `wc.Test` uruchamia test twojej funkcji i wypisuje na ekranie "success" (pl. sukces) lub "failure" (pl. niepowodzenie).
 
 W tym ćwiczeniu może okazać się pomocne zapoznanie się z funkcją
 [[https://golang.org/pkg/strings/#Fields][strings.Fields]].
@@ -319,7 +319,7 @@ Wartości będące funkcjami mogą być użyte jako argumenty funkcji oraz warto
 
 * Domknięcia funkcji (ang. function closures)
 
-Funkcje w Go mogą być domknięciami. Domknięcie to funkcji będąca wartością która odnosi się do zmiennych znajdujących się poza jej ciałem. Funkcja ma dostęp do wspomnianych zmiennych; w tym sensie funkcja jest „powiązana” z tymi zmiennymi.
+Funkcje w Go mogą być domknięciami. Domknięcie to funkcja będąca wartością która odnosi się do zmiennych znajdujących się poza jej ciałem. Funkcja ma dostęp do wspomnianych zmiennych; w tym sensie funkcja jest „powiązana” z tymi zmiennymi.
 
 Przykładowo, funkcja `adder` zwraca domknięcie. Każde domknięcie jest powiązane ze swoją własną zmienną `sum`.
 

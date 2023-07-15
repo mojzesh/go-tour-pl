@@ -1,5 +1,5 @@
 Instrukcje sterujące: for, if, else, switch oraz defer
-Naucz się jak kontrolować działaniem twejego kodu używając instrukcji warunkowych (ang. conditionals), pętli (ang. loops), instrukcji switch oraz defer.
+Naucz się jak kontrolować działanie twojego kodu używając instrukcji warunkowych (ang. conditionals), pętli (ang. loops), instrukcji switch oraz defer.
 
 Autorzy Go
 https://golang.org
@@ -14,7 +14,7 @@ Podstawowa pętla `for` posiada trzy składniki oddzielone średnikiem:
 - wyrażenie warunkowe: sprawdzone przed każdym rozpoczęciem pętli
 - inkrementacja: wykonana po każdej iteracji pętli.
 
-Bardzo często inicjalizacja jest krótką deklaracja zmiennej lub zmiennych, i owe zmienne będą dostępne tylko wewnątrz bloku danej pętli `for`.
+Bardzo często inicjalizacja jest krótką deklaracją zmiennej lub zmiennych, i owe zmienne będą dostępne tylko wewnątrz bloku danej pętli `for`.
 
 Pętla zakończy iterację gdy tylko wartość boolowska przyjmie wartość `false`.
 
@@ -37,13 +37,13 @@ W tym momencie możesz opuścić średniki: `while` z C jest tym samym co `for` 
 
 * Wieczna pętla
 
-Jeśli ominiesz wyrażenie warunkowe pętli, stworzysz nieskończoną pętle.
+Jeśli ominiesz wyrażenie warunkowe pętli, stworzysz nieskończoną pętlę.
 
 .play flowcontrol/forever.go
 
 * If
 
-Instrukcja `if` w Go przypomina jego pętlę `for`; wyrażenia boolowskie nie musi być otoczone nawiasami `(`)` jednak `{`}` są wymagane.
+Instrukcja `if` w Go przypomina jego pętlę `for`; wyrażenie boolowskie nie musi być otoczone nawiasami `(`)` jednak `{`}` są wymagane.
 
 .play flowcontrol/if.go
 
@@ -67,7 +67,7 @@ Zmienne zadeklarowane w środku krótkiej instrukcji `if` są również dostępn
 
 * Ćwiczenie: Pętle oraz funkcje
 
-Jako sposób na przećwiczenie funkcji oraz pętli, zaimplementujmy funkcję pierwiastka kwadratowego: mając daną liczbę x, chcemy znaleźć liczbę z, taką że z² jest możliwie najbliższej liczby x.
+Jako sposób na przećwiczenie funkcji oraz pętli, zaimplementujmy funkcję pierwiastka kwadratowego: mając daną liczbę x, chcemy znaleźć liczbę z, taką że z² jest możliwie najbliżej liczby x.
 
 Komputery z reguły obliczają pierwiastek kwadratowy x używając pętli.
 Zaczynając od jakieś wybranej liczby `z`, możemy poprawić wartość `z` na podstawie tego jak blisko jest z² do x, ulepszając nasz rezultat:
@@ -82,7 +82,7 @@ Przyzwoitym punktem startowym dla dowolnego `z` będzie 1.
 Na początek, powtórz obliczenia 10 razy i wydrukuj każde `z`.
 Zobacz jak blisko odpowiedzi jesteś dla różnych wartości x (1, 2, 3, ...) oraz jak szybko wynik się poprawia.
 
-Wskazówka. By zadeklarować wartość zmiennoprzecinkową (ang. floating point value),
+Wskazówka: By zadeklarować wartość zmiennoprzecinkową (ang. floating point value),
 skorzystaj ze składni zmiennoprzecinkowej lub użyj konwersji:
 
 	z := 1.0
@@ -97,14 +97,14 @@ Jak blisko wartość zwracana przez twoją funkcję jest tej zwracanej przez fun
 z², przeskalowuje wielkość o jaką poprawiamy z, by uwzględnić to jak szybko zmienia się wartość z².)
 
 To podejście nazywane jest [[https://en.wikipedia.org/wiki/Newton%27s_method][metodą Newtona]].
-Działa ono bardzo dobrze dla wielu funkcjach, jednak wyjątkowo dobrze dla pierwiastka kwadratowego.
+Działa ono bardzo dobrze dla wielu funkcji, jednak wyjątkowo dobrze dla pierwiastka kwadratowego.
 
 .play flowcontrol/exercise-loops-and-functions.go
 
 * Switch
 
 Instrukcja warunkowa `switch` jest krótszym sposobem na zapisanie ciągu instrukcji `if`-`else`.
-Wykonuje pierwszy przypadek dla którego wartość jego warunku jest równa wyrażaniu warunkowemu.
+Wykonuje pierwszy przypadek dla którego wartość jego warunku jest równa wyrażeniu warunkowemu.
 
 Switch w Go jest jak to w C, C++, Java, JavaScript, oraz PHP,
 z tą różnicą że w Go, wykonywany jest tylko przypadek (ang. case) który spełnia zadany warunek, a nie również wszystkie pod nim.
@@ -142,7 +142,7 @@ Ta konstrukcja może być bardziej przejrzystym sposobem na zapisanie długiego 
 
 * Defer — czyli opóźnione wykonanie
 
-Instrukcja defer opóźnia wykonanie funkcji do momentu gdy otaczająca funkcja zwróci wyniku.
+Instrukcja defer opóźnia wykonanie funkcji do momentu gdy otaczająca funkcja zwróci wynik.
 
 Wywołane argumenty w defer są ewaluowane natychmiastowo, jednak sama funkcja
 jest wywołana dopiero gdy otaczająca ją funkcja zwróci wynik.
@@ -151,7 +151,7 @@ jest wywołana dopiero gdy otaczająca ją funkcja zwróci wynik.
 
 * Stertowanie defer
 
-Funkcje wywołane z instrukcją `defer` są umieszczane na stosie. Po tym jak główna funkcja zwróci wynik, funkcje wywołane wewnątrz niej z instrukcją `defer` z są wykonywane w kolejności od ostatniej do pierwszej z nich która została umieszczona na stosie (LIFO, ang. Last In, First Out).
+Funkcje wywołane z instrukcją `defer` są umieszczane na stosie. Po tym jak główna funkcja zwróci wynik, funkcje wywołane wewnątrz niej z instrukcją `defer` są wykonywane w kolejności od ostatniej do pierwszej z nich która została umieszczona na stosie (LIFO, ang. Last In, First Out).
 
 By dowiedzieć się więcej o instrukcji `defer`, przeczytaj ten
 [[https://blog.golang.org/defer-panic-and-recover][artykuł]] na „The Go Blog”.

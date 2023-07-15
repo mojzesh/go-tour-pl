@@ -25,7 +25,7 @@ value('tableOfContents', [{
 }, {
     'id': 'concurrency',
     'title': 'Współbieżność',
-    'description': '<p>Go dostarcza funkcjonalność współbieżności jako podstawową cześć języka.</p><p>Ten moduł omawia gorutyny oraz kanały, oraz jak są one używane by zaimplementować rózne wzorce współbieżności.</p>',
+    'description': '<p>Go dostarcza funkcjonalność współbieżności jako podstawową cześć języka.</p><p>Ten moduł omawia gorutyny oraz kanały, oraz jak są one używane by zaimplementować różne wzorce współbieżności.</p>',
     'lessons': ['concurrency']
 }]).
 
